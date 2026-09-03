@@ -1,5 +1,4 @@
-import {Pool} from "pg"
-
+import {Pool} from "pg";
 
 const pool = new Pool({
 
