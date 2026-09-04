@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import pool from "../db.js";
+import jwt from "jsonwebtoken"
 
 function signup(req, res) {
   const username = req.body?.username?.toLowerCase();
@@ -99,7 +100,9 @@ function Login(req,res) {
 
    }
 
-  const hash_password = result.rows[0].hash_password
+  const hash_password = result.rows[0].hash_password  
+  const userid = result.rows[0].userid  
+  const  usrname = result.rows[0].username  
 
   try {
 
@@ -111,12 +114,16 @@ function Login(req,res) {
       success : false,
       message : "Username or Password did not matched"
     })
-      
     }
 
 
-// jwt implementation
-    
+    const token = jwt.sign({userid : userid , username : usrname} , process.env.JWTSECKEY , {expiresIn : "3h"})
+    return res.cookie("jwt" , token).status(200).json({
+
+      status : true,
+      message : "Logged In Sucessfull",
+
+    })
     
     
   } 
@@ -132,7 +139,6 @@ function Login(req,res) {
     
     
   }
-   
    
     
   }
