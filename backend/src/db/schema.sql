@@ -69,10 +69,9 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.userfinance (
     userid integer NOT NULL,
     finance_id integer NOT NULL,
-    day_income integer DEFAULT 0 NOT NULL,
-    day_expenses integer DEFAULT 0 NOT NULL,
-    day_summary integer DEFAULT 0 NOT NULL,
-    spent_at character varying(50) DEFAULT 'Personal Use'::character varying NOT NULL,
+    day_income integer DEFAULT 0,
+    day_expenses integer DEFAULT 0,
+    spent_at character varying(50) DEFAULT 'Personal Use'::character varying,
     note text,
     todays_date timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     finance_month public.todays_month NOT NULL
@@ -199,4 +198,6 @@ ALTER TABLE ONLY public.userfinance
 --
 
 INSERT INTO public.schema_migrations (version) VALUES
-    ('20260902135831');
+    ('20260902135831'),
+    ('20260905092301'),
+    ('20260905101056');
