@@ -10,6 +10,7 @@ import "dotenv/config"
 import authrouter from "./routes/authroutes.js";
 import infoRouter from "./routes/infoRoute.js";
 import financeRouter from "./routes/financeRoute.js"
+import profileRouter from "./routes/profileRoutes.js"
 
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use("/auth" , authrouter)
 app.use("/api" , infoRouter)
 app.use("/api" , financeRouter)
+app.use("/api" , profileRouter)
 
 
 app.listen(port , (() => {console.log(`App is listening on ${port}`)}))

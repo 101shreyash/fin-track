@@ -11,6 +11,13 @@
 
 
 
-const testText = "Its me Shreyash aNd in this project we are going make sure about the best practices along with manageble and maintainable backend architecture"
+// const testText = "Its me Shreyash aNd in this project we are going make sure about the best practices along with manageble and maintainable backend architecture"
+
+
+
+
+
+
+const fullMonth = new Date().toLocaleString( "en-US" , { month: 'long' }).toLowerCase()
 
 

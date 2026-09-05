@@ -89,7 +89,7 @@ function askFullName(req, res) {
   async function updateFullName() {
     try {
 
-      pool.query("UPDATE users SET full_name = $1 WHERE userid = $2;" , [fullname , userid])
+     await pool.query("UPDATE users SET full_name = $1 WHERE userid = $2;" , [fullname , userid])
 
     return res.status(200).json({
 

@@ -74,7 +74,8 @@ CREATE TABLE public.userfinance (
     spent_at character varying(50) DEFAULT 'Personal Use'::character varying,
     note text,
     todays_date timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    finance_month public.todays_month NOT NULL
+    finance_month public.todays_month NOT NULL,
+    gained_at character varying(50) DEFAULT 'Usual Paychecks'::character varying NOT NULL
 );
 
 
@@ -200,4 +201,5 @@ ALTER TABLE ONLY public.userfinance
 INSERT INTO public.schema_migrations (version) VALUES
     ('20260902135831'),
     ('20260905092301'),
-    ('20260905101056');
+    ('20260905101056'),
+    ('20260905125635');
