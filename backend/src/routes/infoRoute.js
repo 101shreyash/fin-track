@@ -1,12 +1,11 @@
 import express from "express"
 import authenticate from "../middleware/authMiddleware.js";
-import { askFullName, defaultCurrency } from "../controllers/infoController.js";
+import userInfo from "../controllers/infoController.js"
+
 
 const router = express.Router()
 
-router.post("/fullname" , authenticate , askFullName)
-
-router.post("/currencytype" , authenticate , defaultCurrency)
+router.post("/userinfo" , authenticate , userInfo)
 
 
 export default router;

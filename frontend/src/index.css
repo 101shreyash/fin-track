@@ -1,0 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Oswald:wght@200..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+body {
+  background-color: black;
+  color: #9ACD32;
+}
+
+.homepage-hero {
+  text-align: center;
+  margin-top: 10%;
+}
+
+.main-head {
+  font-size: 50px;
+  font-family: "Oswald", sans-serif;
+}
+
+.sub-head {
+  font-family: "PT Serif", serif;
+}
+
+.quick-links {
+  font-family: "Oswald", sans-serif;
+
+  border: none;
+  cursor: pointer;
+  color: #9ACD32;
+  text-decoration: none;
+  font-size: 25px;
+}
+
+.quick-links:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.signup-form {
+  margin-top: 8%;
+  text-align: center;
+}
+
+.initial-input {
+  height: 0.2in;
+  width: 12%;
+}
+
+.footer-link {
+
+  text-decoration: none;
+  color: #9ACD32;
+}
+
+.footer-link:hover {
+  text-underline-offset: 3px;
+  text-decoration: underline white;
+}
+
+
+.head-paragraph{
+
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 30px;
+}
+
+.select-currency{
+  border: none;
+  width: 20%;
+  height: 30px;
+  /* background-color: #83a235;  */
+    font-family: "Oswald", sans-serif;
+
+}
+
+input::placeholder{
+  font-size: 20px;
+  color: black;
+}
