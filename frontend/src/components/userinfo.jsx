@@ -1,32 +1,36 @@
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
 function UserInfo() {
+  let { register, handleSubmit } = useForm();
+  let navigate = useNavigate();
 
+  function AfterSubmit(data) {
+    console.log(data);
+    navigate("/trackfinance");
+  }
 
-    return <div style={{ marginTop: "5%", textAlign: "center" }}>
+  return (
+    <div style={{ marginTop: "5%", textAlign: "center" }}>
+      <form onSubmit={handleSubmit(AfterSubmit)}>
+        <h1 className="sub-head">Enter Your Fullname </h1>
+        <input style={{height : "0.3in", width : "4in"}} type="text" placeholder="Enter your fullname" {...register("fullname")} required/>
+        <h1 className="sub-head"> Choose Your default Currency</h1>
+        <p style={{ fontSize: "18px" }}> Note : We are planning to add more Currency codes in the future</p>
+        <select style={{height : "0.3in", width : "4in"}} {...register("currency")}>
+          <option>USD</option>
+          <option>NPR</option>
+          <option>EUR</option>
+          <option>AUD</option>
+          <option>CAD</option>
+          <option>INR</option>
+        </select>
 
-        <form>
-
-            <p className="head-paragraph">Enter Your Fullname</p>
-            <input style={{ height: "30px", width: "20%", paddingLeft: "30px", border: "none", color: "black" }} type="text" placeholder="Enter your fullname" />
-            <p className="head-paragraph">Choose Your Default Currency Type</p>
-            <p style={{fontSize : "20px"}}>Note : We are planning to add more codes in the future</p>
-            <br /><br />
-            <select className="select-currency">
-                <option>USD</option>
-                <option>NPR</option>
-                <option>EUR</option>
-                <option>AUD</option>
-                <option>CAD</option>
-                <option>INR</option>
-            </select>
-
-            <br /><br /><br />
-
-            <button type="submit">Get Started</button>
-
-        </form>
+        <br /> <br /> <br />
+        <button className="btn" type="submit">Get Started</button>
+      </form>
     </div>
-
-
+  );
 }
 
 export default UserInfo;

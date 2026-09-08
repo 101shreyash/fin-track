@@ -1,79 +1,153 @@
-@import url("https://fonts.googleapis.com/css2?family=Bungee&family=Oswald:wght@200..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fruktur:ital@0;1&family=Nabla:EDPT,EHLT@0,5&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Fruktur:ital@0;1&family=Nabla:EDPT,EHLT@0,5&display=swap");
 
 body {
   background-color: black;
-  color: #9ACD32;
-}
-
-.homepage-hero {
-  text-align: center;
-  margin-top: 10%;
+  color: rgb(239, 225, 168);
+  margin: 0;
+  padding: 0;
 }
 
 .main-head {
+  font-family: "Nabla", system-ui;
   font-size: 50px;
-  font-family: "Oswald", sans-serif;
 }
 
 .sub-head {
-  font-family: "PT Serif", serif;
+  font-family: "Fruktur", system-ui;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .quick-links {
-  font-family: "Oswald", sans-serif;
-
-  border: none;
-  cursor: pointer;
-  color: #9ACD32;
-  text-decoration: none;
-  font-size: 25px;
+  font-family: "Fruktur", system-ui;
+  color: rgb(239, 225, 168);
+  font-size: 30px;
+  text-decoration: underline;
+  text-underline-offset: 7px;
 }
 
 .quick-links:hover {
-  text-decoration: underline;
-  text-underline-offset: 6px;
-}
-
-.signup-form {
-  margin-top: 8%;
-  text-align: center;
-}
-
-.initial-input {
-  height: 0.2in;
-  width: 12%;
+  text-decoration: underline rgb(236, 190, 4);
 }
 
 .footer-link {
-
   text-decoration: none;
-  color: #9ACD32;
+  color: rgb(239, 225, 168);
 }
 
 .footer-link:hover {
-  text-underline-offset: 3px;
-  text-decoration: underline white;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-
-.head-paragraph{
-
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 30px;
-}
-
-.select-currency{
+.btn {
+  height: 0.4in;
+  width: 1in;
+  background-color: rgb(239, 225, 168);
   border: none;
-  width: 20%;
-  height: 30px;
-  /* background-color: #83a235;  */
-    font-family: "Oswald", sans-serif;
-
+  border-radius: 4%;
 }
 
-input::placeholder{
+.btn:hover {
+  background-color: rgb(239, 215, 123);
+}
+
+.info-links {
+  color: rgb(231, 216, 156);
+  font-size: 30px;
+  text-decoration: underline white;
+  text-underline-offset: 6px;
+}
+
+.info-links:hover {
+  text-decoration: underline;
+}
+
+.questions {
+  padding-left: 2%;
+  align-content: center;
+  height: 0.5in;
+  background-color: rgb(41, 39, 39);
+}
+
+.questions:hover {
+  cursor: pointer;
+  background-color: rgb(91, 89, 89);
+}
+
+.common-links{
+
+  margin: 3%;
+  font-family: "Fruktur", system-ui;
+  color: rgb(239, 225, 168);
   font-size: 20px;
-  color: black;
+  text-decoration: underline;
+  text-underline-offset: 7px;
 }
+
+.common-links:hover{
+
+    text-decoration: underline rgb(236, 190, 4);
+
+
+}
+
+@media (max-width: 768px) {
+
+  .main-head {
+    font-size: 42px;
+  }
+
+  .quick-links {
+    font-size: 26px;
+  }
+
+  .info-links {
+    font-size: 26px;
+  }
+
+  .questions {
+
+    height: auto;
+    min-height: 0.5in;
+    padding: 12px 2%;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .main-head {
+    font-size: 34px;
+  }
+
+  .sub-head {
+    font-size: 20px;
+  }
+
+  .quick-links {
+    font-size: 22px;
+    text-underline-offset: 5px;
+  }
+
+  .info-links {
+    font-size: 22px;
+    text-underline-offset: 5px;
+  }
+
+  .questions {
+    height: auto;
+    min-height: 45px;
+    padding: 10px 12px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .btn {
+    height: 40px;
+    width: 90px;
+  }
+}
+
+

@@ -8,21 +8,22 @@ function Login() {
     function AfterLogin() {
 
         navigate("/userinfo")
-        
+
     }
 
 
-    return <div className="signup-form">
+    return <div style={{marginTop : "10%" , textAlign : "center"}}>
 
         <form onSubmit={AfterLogin}>
 
-            <h1>Login Now to Get Started</h1>
-            <input className="initial-input" type="text" placeholder="Enter your username" required />
+            <h1 className="sub-head">Login Now to Get Started</h1>
+            <input style={{height : "0.3in"}} className="initial-input" type="text" placeholder="Enter your username" required />
             &nbsp;&nbsp;
-            <input className="initial-input" type="password" placeholder="Enter your password" required />
+            <input  style={{height : "0.3in"}} className="initial-input" type="password" placeholder="Enter your password" required />
             &nbsp;&nbsp;
             <button type="submit">Login</button>
-            <p> New here to fintrack ? <Link to="/signup" className="footer-link">Signup Now</Link></p>
+            <br /><br />
+            <p> New here in fintrack ? <Link to="/signup" className="footer-link">Signup Now</Link></p>
 
 
         </form>
@@ -30,6 +31,7 @@ function Login() {
 
 
     </div>
+
 
 
 }

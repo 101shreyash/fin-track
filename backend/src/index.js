@@ -10,7 +10,7 @@ import "dotenv/config"
 import authrouter from "./routes/authroutes.js";
 import infoRouter from "./routes/infoRoute.js";
 import financeRouter from "./routes/financeRoute.js"
-import profileRouter from "./routes/profileRoutes.js"
+import profileRouter from "./routes/profileRoute.js"
 
 
 const app = express();
@@ -19,7 +19,7 @@ const port = process.env.EXPRESSPORT
 
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
-app.use(cookieParser());
+app.use(cookieParser())
 
 
 app.use("/auth" , authrouter)

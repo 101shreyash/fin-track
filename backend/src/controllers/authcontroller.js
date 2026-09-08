@@ -2,6 +2,7 @@ import bcrypt from "bcrypt";
 import pool from "../db.js";
 import jwt from "jsonwebtoken"
 
+
 function signup(req, res) {
   const username = req.body?.username?.toLowerCase();
   const password = req.body.password;
@@ -56,7 +57,7 @@ function signup(req, res) {
         success: true,
         message: "Signup Sucessfull",
       });
-    } 
+    }
     catch (error) {
 
       if (error.code === "23505") {
@@ -65,7 +66,7 @@ function signup(req, res) {
           success : false,
           message : "Username alredy exits try something unique"
         })
-        
+
       }
 
       console.log(error.message);
@@ -100,9 +101,9 @@ function Login(req,res) {
 
    }
 
-  const hash_password = result.rows[0].hash_password  
-  const userid = result.rows[0].userid  
-  const  usrname = result.rows[0].username  
+  const hash_password = result.rows[0].hash_password
+  const userid = result.rows[0].userid
+  const  usrname = result.rows[0].username
 
   try {
 
@@ -124,10 +125,10 @@ function Login(req,res) {
       message : "Logged In Sucessfull",
 
     })
-    
-    
-  } 
-  
+
+
+  }
+
   catch (error) {
 
     console.log(error)
@@ -136,16 +137,28 @@ function Login(req,res) {
    return res.status(500).json({
       message : "Server Error"
     })
-    
-    
+
+
   }
-   
-    
+
+
   }
 
   DbCall();
-  
+
+
 }
 
 
-export {signup , Login};
+function Logout(req,res) {
+
+  return res.clearCookie("jwt").status(200).json({
+    success : true,
+    message : "Logout Sucessfull"
+  })
+
+
+}
+
+
+export {signup , Login , Logout};
