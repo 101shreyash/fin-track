@@ -8,14 +8,14 @@ function signup(req, res) {
   const password = req.body.password;
 
   if (!username) {
-   return res.json({
+   return res.status(400).json({
       success: false,
       message: "Username is required",
     });
   }
 
   if (username?.length < 5 || username?.length > 20) {
-    return res.json({
+    return res.status(400).json({
       success: false,
       message:
         "Username should'nt contain less than 5 characters and more than 20",
@@ -26,7 +26,7 @@ function signup(req, res) {
     return res.status(400).json({
       success: false,
       message:
-        "Username should only contain aphabets and numbers and shouldn't contain spaces",
+        "Username should only contain alphabets and numbers and shouldn't contain spaces",
     });
   }
 
@@ -38,7 +38,7 @@ function signup(req, res) {
   }
 
   if (password?.length < 8) {
-    return res.json({
+    return res.status(400).json({
       success: false,
       message: "Password should'nt contain less than 8 characters",
     });
@@ -121,7 +121,7 @@ function Login(req,res) {
     const token = jwt.sign({userid : userid , username : usrname} , process.env.JWTSECKEY , {expiresIn : "3h"})
     return res.cookie("jwt" , token).status(200).json({
 
-      status : true,
+      success : true,
       message : "Logged In Sucessfull",
 
     })

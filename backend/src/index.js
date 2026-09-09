@@ -4,6 +4,7 @@ import express from "express"
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
 import "dotenv/config"
+import cors from "cors"
 
 // Routers
 
@@ -17,9 +18,18 @@ const app = express();
 const port = process.env.EXPRESSPORT
 
 
+
 app.use(express.json());
 app.use(express.urlencoded({extended : true}));
 app.use(cookieParser())
+app.use(cors({
+
+
+  origin : "http://localhost:5173",
+  credentials : true,
+
+
+}))
 
 
 app.use("/auth" , authrouter)

@@ -15,7 +15,6 @@ function UserProfile() {
 
    setselectedmonth(data.selectmonth)
 
-
   }
 
   return<div style={{marginTop : "3%" , textAlign : "center"}}>
@@ -64,7 +63,6 @@ function UserProfile() {
 
 
   </form>
-
 
 
 

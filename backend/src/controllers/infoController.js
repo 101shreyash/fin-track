@@ -1,7 +1,7 @@
 import pool from "../db.js";
 
 function userInfo(req, res) {
-  
+
   const userid = req.user.userid;
   const currencytype = req.body.currency;
   const fullname = req.body.fullname;
@@ -66,12 +66,12 @@ function userInfo(req, res) {
       );
       res.status(200).json({
         success: true,
-        message: ` Welcome ${fullname} , ${currencytype} is now your default currency type`,
+        message: `Welcome ${fullname} , ${currencytype} is now your default currency type`,
       });
     } catch (error) {
 
       console.log(error);
-      
+
 
       if (error.code === "22P02") {
         return res.status(422).json({

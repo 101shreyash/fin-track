@@ -1,13 +1,50 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function UserInfo() {
   let { register, handleSubmit } = useForm();
   let navigate = useNavigate();
 
-  function AfterSubmit(data) {
-    console.log(data);
-    navigate("/trackfinance");
+  async function AfterSubmit(data) {
+
+    const fullname = data.fullname
+    const currencytype = data.currencytype
+
+    try {
+
+     const result =  await fetch("http://localhost:8001/api/userinfo" , {
+        credentials : "include",
+        method : "POST",
+        body : JSON.stringify({currency : currencytype , fullname : fullname}),
+        headers : ({
+          'Content-type' : 'application/json'
+        })
+      })
+
+      const msg = await result.json();
+      console.log(msg);
+
+      if (result.status === 200 && msg.success === true) {
+
+        toast.success(msg.message , {duration : 3000})
+        return navigate("/trackfinance")
+
+      }
+
+
+
+    }
+
+    catch (error) {
+
+      console.log(error);
+      toast.error(error.message)
+
+
+    }
+
+    // navigate("/trackfinance");
   }
 
   return (
@@ -17,7 +54,7 @@ function UserInfo() {
         <input style={{height : "0.3in", width : "4in"}} type="text" placeholder="Enter your fullname" {...register("fullname")} required/>
         <h1 className="sub-head"> Choose Your default Currency</h1>
         <p style={{ fontSize: "18px" }}> Note : We are planning to add more Currency codes in the future</p>
-        <select style={{height : "0.3in", width : "4in"}} {...register("currency")}>
+        <select style={{height : "0.3in", width : "4in"}} {...register("currencytype")}>
           <option>USD</option>
           <option>NPR</option>
           <option>EUR</option>

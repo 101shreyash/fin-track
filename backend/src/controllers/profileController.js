@@ -6,7 +6,7 @@ function ViewProfile(req, res) {
   async function DbCall() {
     try {
       const result = await pool.query(
-        "SELECT full_name FROM users WHERE userid = $1",
+        "SELECT full_name , currency_type FROM users WHERE userid = $1",
         [userid],
       );
 

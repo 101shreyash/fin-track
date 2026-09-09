@@ -54,6 +54,38 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: receipt; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.receipt (
+    userid integer NOT NULL,
+    finance_id integer NOT NULL,
+    receipt_img_url text,
+    receipt_id integer NOT NULL
+);
+
+
+--
+-- Name: receipt_receipt_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.receipt_receipt_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: receipt_receipt_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.receipt_receipt_id_seq OWNED BY public.receipt.receipt_id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -134,6 +166,13 @@ ALTER SEQUENCE public.users_userid_seq OWNED BY public.users.userid;
 
 
 --
+-- Name: receipt receipt_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.receipt ALTER COLUMN receipt_id SET DEFAULT nextval('public.receipt_receipt_id_seq'::regclass);
+
+
+--
 -- Name: userfinance finance_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -145,6 +184,14 @@ ALTER TABLE ONLY public.userfinance ALTER COLUMN finance_id SET DEFAULT nextval(
 --
 
 ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.users_userid_seq'::regclass);
+
+
+--
+-- Name: receipt receipt_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.receipt
+    ADD CONSTRAINT receipt_pkey PRIMARY KEY (receipt_id);
 
 
 --
@@ -180,6 +227,22 @@ ALTER TABLE ONLY public.users
 
 
 --
+-- Name: receipt receipt_finance_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.receipt
+    ADD CONSTRAINT receipt_finance_id_fkey FOREIGN KEY (finance_id) REFERENCES public.userfinance(finance_id);
+
+
+--
+-- Name: receipt receipt_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.receipt
+    ADD CONSTRAINT receipt_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
+
+
+--
 -- Name: userfinance userfinance_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -202,4 +265,6 @@ INSERT INTO public.schema_migrations (version) VALUES
     ('20260902135831'),
     ('20260905092301'),
     ('20260905101056'),
-    ('20260905125635');
+    ('20260905125635'),
+    ('20260909075245'),
+    ('20260909080051');

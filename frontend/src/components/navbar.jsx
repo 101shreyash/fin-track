@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <>
-         <Link to="/aboutus" className="common-links">Aboutus</Link>
-        <Link to="/profile" className="common-links">Profile</Link>
+        <Link to="/profile" className="common-links">Records</Link>
         <Link to="/faq" className="common-links">FAQ</Link>
-        <Link to="/" className="common-links">Logout</Link>
+        {/* <Link to="/" className="common-links">Logout</Link> */}
+        <button style={{border : "none" , background : "none"}} className="common-links">Logout</button>
     </>
   );
 }
