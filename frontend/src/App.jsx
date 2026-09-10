@@ -8,6 +8,9 @@ import TrackFinance from "./components/trackfinance";
 import AboutUs from "./components/aboutus";
 import UserProfile from "./components/userprofile";
 import FrequentQuestions from "./components/faq";
+import UserReceipts from "./components/receipts";
+import Usersetting from "./components/setting";
+import  DeleteAccount from "./components/delete";
 
 
 function App() {
@@ -24,6 +27,10 @@ function App() {
     <Route path="/aboutus" element ={<AboutUs/>}/>
     <Route path="/faq" element ={<FrequentQuestions/>}/>
     <Route path="/profile" element ={<UserProfile/>}/>
+    <Route path="/receipts" element ={<UserReceipts/>}/>
+    <Route path="/setting" element ={<Usersetting/>}/>
+    <Route path="/setting/delete" element ={<DeleteAccount/>}/>
+    <Route path="*" element ={<h1 style={{textAlign : "center" , marginTop : "10%"}}>404 Page Not found</h1>}/>
 
 
   </Routes>

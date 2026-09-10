@@ -10,9 +10,9 @@ function keepFinance(req, res) {
   const spentAt = req.body.spentin;
   const gainedAt = req.body.gainedin;
   const note = req.body.note?.toLowerCase();
-  const fullMonth = new Date().toLocaleString( "en-US" , { month: 'long' }).toLowerCase()
-
-
+  const fullMonth = new Date()
+    .toLocaleString("en-US", { month: "long" })
+    .toLowerCase();
 
   if (dayIncome < 0 || dayExpenses < 0) {
     return res.status(400).json({
@@ -48,8 +48,7 @@ function keepFinance(req, res) {
         success: true,
         message: "Saved the record",
       });
-    }
-     catch (error) {
+    } catch (error) {
       console.log(error.message);
       return res.status(500).json({
         success: false,
@@ -59,7 +58,6 @@ function keepFinance(req, res) {
   }
 
   TrackFinance();
-
 } // keep finance Scope Ends here
 
 export default keepFinance;

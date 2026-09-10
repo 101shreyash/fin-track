@@ -1,51 +1,50 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
+import { useEffect } from "react";
 
 function Login() {
   const navigate = useNavigate();
-  let { register, handleSubmit , reset } = useForm();
+  let { register, handleSubmit, reset } = useForm();
 
   async function AfterLogin(data) {
     try {
       const username = data.username;
       const password = data.password;
 
-     const result =  await fetch("http://localhost:8001/auth/login" , {
+      const result = await fetch("http://localhost:8001/auth/login", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({ username: username, password: password }),
+        headers: {
+          "Content-type": "application/json",
+        },
+      });
 
-        method : "POST",
-        credentials : "include",
-        body : JSON.stringify({username : username , password : password}),
-        headers : ({
-          'Content-type' : 'application/json',
-        })
-      })
-
-      const msg = await result.json()
+      const msg = await result.json();
       console.log(msg);
 
-      if (result.status === 400 && msg.success === false && msg.message === "Username or Password did not matched") {
-
-         toast.error("Username or Password did not matched" , {duration : 2000})
-         return reset();
-
+      if (
+        result.status === 400 &&
+        msg.success === false &&
+        msg.message === "Username or Password did not matched"
+      ) {
+        toast.error("Username or Password did not matched", { duration: 2000 });
+        return reset();
       }
 
-      if (result.status === 200 && msg.success === true && msg.message === "Logged In Sucessfull") {
-
-         toast.success("Logged In Sucessfull" , {duration : 1000})
-         return navigate("/userinfo");
-
+      if (
+        result.status === 200 &&
+        msg.success === true &&
+        msg.message === "Logged In Sucessfull"
+      ) {
+        toast.success("Logged In Sucessfull", { duration: 1000 });
+        return navigate("/userinfo");
       }
-
-
-    }
-
-    catch (error) {
+    } catch (error) {
       console.log(error);
       return toast.error(error.message);
     }
-
   }
 
   return (

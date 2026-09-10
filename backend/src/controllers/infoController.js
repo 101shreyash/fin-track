@@ -1,10 +1,16 @@
 import pool from "../db.js";
 
 function userInfo(req, res) {
-
   const userid = req.user.userid;
   const currencytype = req.body.currency;
   const fullname = req.body.fullname;
+
+  if (fullname === "fullname") {
+    return res.status(400).json({
+      success: false,
+      message: "Fullname is reserved word by default try different names",
+    });
+  }
 
   if (!currencytype) {
     return res.status(400).json({
@@ -27,7 +33,6 @@ function userInfo(req, res) {
         "Currency Code should not contain numbers ,  enter valid currency code",
     });
   }
-
 
   if (!fullname) {
     return res.status(400).json({
@@ -57,21 +62,18 @@ function userInfo(req, res) {
     });
   }
 
-
   async function updateUserinfo() {
     try {
       await pool.query(
         "UPDATE users  SET full_name = $1 , currency_type = $2  WHERE userid = $3",
-        [ fullname , currencytype, userid],
+        [fullname, currencytype, userid],
       );
       res.status(200).json({
         success: true,
         message: `Welcome ${fullname} , ${currencytype} is now your default currency type`,
       });
     } catch (error) {
-
       console.log(error);
-
 
       if (error.code === "22P02") {
         return res.status(422).json({
@@ -89,7 +91,5 @@ function userInfo(req, res) {
 
   updateUserinfo();
 }
-
-
 
 export default userInfo;

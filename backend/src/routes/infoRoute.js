@@ -1,11 +1,9 @@
-import express from "express"
+import express from "express";
 import authenticate from "../middleware/authMiddleware.js";
-import userInfo from "../controllers/infoController.js"
+import userInfo from "../controllers/infoController.js";
 
+const router = express.Router();
 
-const router = express.Router()
-
-router.post("/userinfo" , authenticate , userInfo)
-
+router.post("/userinfo", authenticate, userInfo);
 
 export default router;

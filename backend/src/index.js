@@ -12,6 +12,7 @@ import authrouter from "./routes/authroutes.js";
 import infoRouter from "./routes/infoRoute.js";
 import financeRouter from "./routes/financeRoute.js"
 import profileRouter from "./routes/profileRoute.js"
+import settingRouter from "./routes/settingRoutes.js"
 
 
 const app = express();
@@ -36,6 +37,7 @@ app.use("/auth" , authrouter)
 app.use("/api" , infoRouter)
 app.use("/api" , financeRouter)
 app.use("/api" , profileRouter)
+app.use("/api" , settingRouter)
 
 
 app.listen(port , (() => {console.log(`App is listening on ${port}`)}))

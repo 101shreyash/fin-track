@@ -1,14 +1,13 @@
 import bcrypt from "bcrypt";
 import pool from "../db.js";
-import jwt from "jsonwebtoken"
-
+import jwt from "jsonwebtoken";
 
 function signup(req, res) {
   const username = req.body?.username?.toLowerCase();
   const password = req.body.password;
 
   if (!username) {
-   return res.status(400).json({
+    return res.status(400).json({
       success: false,
       message: "Username is required",
     });
@@ -57,22 +56,18 @@ function signup(req, res) {
         success: true,
         message: "Signup Sucessfull",
       });
-    }
-    catch (error) {
-
+    } catch (error) {
       if (error.code === "23505") {
-
         return res.status(409).json({
-          success : false,
-          message : "Username alredy exits try something unique"
-        })
-
+          success: false,
+          message: "Username alredy exits try something unique",
+        });
       }
 
       console.log(error.message);
       console.log(error);
 
-     return  res.status(500).json({
+      return res.status(500).json({
         message: "Server error",
       });
       console.log(error.message);
@@ -82,83 +77,64 @@ function signup(req, res) {
   DbCall();
 }
 
-
-function Login(req,res) {
-
-  const username = req.body?.username?.toLowerCase()
-  const plainpassword = req.body?.password
+function Login(req, res) {
+  const username = req.body?.username?.toLowerCase();
+  const plainpassword = req.body?.password;
 
   async function DbCall() {
+    const result = await pool.query(
+      "SELECT userid , username , hash_password FROM users WHERE username = $1",
+      [username],
+    );
 
-   const result =  await pool.query("SELECT userid , username , hash_password FROM users WHERE username = $1" , [username])
-
-   if (result.rowCount === 0) {
-
-    return res.status(400).json({
-      success : false,
-      message : "Username or Password did not matched"
-    })
-
-   }
-
-  const hash_password = result.rows[0].hash_password
-  const userid = result.rows[0].userid
-  const  usrname = result.rows[0].username
-
-  try {
-
-    const matched = await bcrypt.compare(plainpassword , hash_password)
-
-    if (!matched) {
-
+    if (result.rowCount === 0) {
       return res.status(400).json({
-      success : false,
-      message : "Username or Password did not matched"
-    })
+        success: false,
+        message: "Username or Password did not matched",
+      });
     }
 
+    const hash_password = result.rows[0].hash_password;
+    const userid = result.rows[0].userid;
+    const usrname = result.rows[0].username;
 
-    const token = jwt.sign({userid : userid , username : usrname} , process.env.JWTSECKEY , {expiresIn : "3h"})
-    return res.cookie("jwt" , token).status(200).json({
+    try {
+      const matched = await bcrypt.compare(plainpassword, hash_password);
 
-      success : true,
-      message : "Logged In Sucessfull",
+      if (!matched) {
+        return res.status(400).json({
+          success: false,
+          message: "Username or Password did not matched",
+        });
+      }
 
-    })
+      const token = jwt.sign(
+        { userid: userid, username: usrname },
+        process.env.JWTSECKEY,
+        { expiresIn: "3h" },
+      );
+      return res.cookie("jwt", token).status(200).json({
+        success: true,
+        message: "Logged In Sucessfull",
+      });
+    } catch (error) {
+      console.log(error);
+      console.log(error.message);
 
-
-  }
-
-  catch (error) {
-
-    console.log(error)
-    console.log(error.message);
-
-   return res.status(500).json({
-      message : "Server Error"
-    })
-
-
-  }
-
-
+      return res.status(500).json({
+        message: "Server Error",
+      });
+    }
   }
 
   DbCall();
-
-
 }
 
-
-function Logout(req,res) {
-
+function Logout(req, res) {
   return res.clearCookie("jwt").status(200).json({
-    success : true,
-    message : "Logout Sucessfull"
-  })
-
-
+    success: true,
+    message: "Logout Sucessfull",
+  });
 }
 
-
-export {signup , Login , Logout};
+export { signup, Login, Logout };

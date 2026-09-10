@@ -231,7 +231,7 @@ ALTER TABLE ONLY public.users
 --
 
 ALTER TABLE ONLY public.receipt
-    ADD CONSTRAINT receipt_finance_id_fkey FOREIGN KEY (finance_id) REFERENCES public.userfinance(finance_id);
+    ADD CONSTRAINT receipt_finance_id_fkey FOREIGN KEY (finance_id) REFERENCES public.userfinance(finance_id) ON DELETE CASCADE;
 
 
 --
@@ -247,7 +247,7 @@ ALTER TABLE ONLY public.receipt
 --
 
 ALTER TABLE ONLY public.userfinance
-    ADD CONSTRAINT userfinance_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
+    ADD CONSTRAINT userfinance_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid) ON DELETE CASCADE;
 
 
 --
@@ -267,4 +267,5 @@ INSERT INTO public.schema_migrations (version) VALUES
     ('20260905101056'),
     ('20260905125635'),
     ('20260909075245'),
-    ('20260909080051');
+    ('20260909080051'),
+    ('20260910151247');

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import {useForm} from "react-hook-form"
 import { useState } from "react";
+import NavBar from "./navbar"
 
 function UserProfile() {
 
@@ -20,13 +21,12 @@ function UserProfile() {
   return<div style={{marginTop : "3%" , textAlign : "center"}}>
 
          <Link to="/trackfinance" className="common-links">Track Finance</Link>
-         <Link to="/" className="common-links">Logout</Link>
-         <Link to="/faq" className="common-links">FAQ</Link>
+         <NavBar/>
          <br /><br />
   <h1 className="sub-head">Welcome Shreyash , Its {year}</h1>
   <br /><br />
 
-<h1 className="main-head">{month} {day} RECORDS </h1>
+<h1 className="sub-head" style={{textDecoration : "underline white 8px" , textUnderlineOffset : "10px"}}>{month} {day} RECORDS </h1>
   <p  style={{fontSize : "30px"}} className="sub-head">  Expenses : $0 </p>
   <p  style = {{fontSize : "30px"}}className="sub-head"> Income : $0</p>
 
@@ -54,7 +54,7 @@ function UserProfile() {
 &nbsp;&nbsp;
 <button type="submit" className="btn">View</button>
 
-{selectedmonth ? <h1 className="main-head"> {selectedmonth} RECORDS  </h1> : ""}
+{selectedmonth ? <h1 className="sub-head" style={{textDecoration : "underline white 8px", textUnderlineOffset : "10px" }}> {selectedmonth} RECORDS  </h1> : ""}
 {selectedmonth ? <p  style={{fontSize : "30px"}} className="sub-head">  Total Expenses : $0 </p> : ""}
 {selectedmonth ? <p  style={{fontSize : "30px"}} className="sub-head">  Total Income : $0 </p> : ""}
 {selectedmonth ? <p  style={{fontSize : "30px"}} className="sub-head">  Spent Mostly On : CatergoryX </p> : ""}
