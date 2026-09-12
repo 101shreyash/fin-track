@@ -75,7 +75,7 @@ function Login() {
         <p>
           {" "}
           New here in fintrack ?{" "}
-          <Link to="/signup" className="footer-link">
+          <Link to="/signup" className="common-links">
             Signup Now
           </Link>
         </p>

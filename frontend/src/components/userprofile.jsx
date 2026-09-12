@@ -21,6 +21,7 @@ function UserProfile() {
   return<div style={{marginTop : "3%" , textAlign : "center"}}>
 
          <Link to="/trackfinance" className="common-links">Track Finance</Link>
+         &nbsp;&nbsp;&nbsp;
          <NavBar/>
          <br /><br />
   <h1 className="sub-head">Welcome Shreyash , Its {year}</h1>

@@ -33,8 +33,8 @@ function TrackFinance() {
         });
       }
 
-      setcurrencytype(msg.message.currency_type);
-      return setusername(msg.message.full_name);
+      setcurrencytype(msg.message?.currency_type);
+      return setusername(msg.message?.full_name);
     } catch (error) {
       console.log(error);
       return toast.error(error.message);

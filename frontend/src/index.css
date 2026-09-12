@@ -1,214 +1,38 @@
-@import url("https://fonts.googleapis.com/css2?family=Fruktur:ital@0;1&family=Nabla:EDPT,EHLT@0,5&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Fruktur:ital@0;1&family=Nabla:EDPT,EHLT@0,5&display=swap");
-
-body {
-  background-color: black;
-  color: rgb(239, 225, 168);
-  margin: 0;
-  padding: 0;
+body{
+  background-color: rgb(86, 82, 82);
+  color:  white;
 }
 
-.main-head {
-  font-family: "Nabla", system-ui;
-  font-size: 50px;
-}
 
-.sub-head {
-  font-family: "Fruktur", system-ui;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.quick-links {
-  font-family: "Fruktur", system-ui;
-  color: rgb(239, 225, 168);
-  font-size: 30px;
-  text-decoration: underline;
-  text-underline-offset: 7px;
-}
-
-.quick-links:hover {
-  text-decoration: underline rgb(236, 190, 4);
-}
-
-.footer-link {
+.common-links {
   text-decoration: none;
-  color: rgb(239, 225, 168);
+  font-size: 20px;
+  color: black;
 }
 
-.footer-link:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.btn {
-  height: 0.4in;
-  width: 1in;
-  background-color: rgb(239, 225, 168);
-  border: none;
-  border-radius: 4%;
-}
-
-.btn:hover {
-  background-color: rgb(239, 215, 123);
-}
-
-.info-links {
-  color: rgb(231, 216, 156);
-  font-size: 30px;
-  text-decoration: underline white;
-  text-underline-offset: 6px;
-}
-
-.info-links:hover {
-  text-decoration: underline;
+.common-links:hover {
+  text-decoration: underline black;
+  text-underline-offset: 5px;
 }
 
 .questions {
-  padding-left: 2%;
-  align-content: center;
   height: 0.5in;
-  background-color: rgb(41, 39, 39);
+  align-content: center;
+  padding-left: 1%;
+  background-color: rgb(212, 211, 211);
 }
 
 .questions:hover {
-  cursor: pointer;
-  background-color: rgb(91, 89, 89);
+  background-color: rgb(192, 191, 191);
 }
 
-.common-links{
-
-  margin: 3%;
-  font-family: "Fruktur", system-ui;
-  color: rgb(239, 225, 168);
+.setting-btn {
   font-size: 20px;
-  text-decoration: underline;
-  text-underline-offset: 7px;
+  color: black;
+  text-decoration: none;
 }
 
-.common-links:hover{
-
-    text-decoration: underline rgb(236, 190, 4);
-
-
-}
-
-@media (max-width: 768px) {
-
-  .main-head {
-    font-size: 42px;
-  }
-
-  .quick-links {
-    font-size: 26px;
-  }
-
-  .info-links {
-    font-size: 26px;
-  }
-
-  .questions {
-
-    height: auto;
-    min-height: 0.5in;
-    padding: 12px 2%;
-  }
-}
-
-
-@media (max-width: 480px) {
-
-  .main-head {
-    font-size: 34px;
-  }
-
-  .sub-head {
-    font-size: 20px;
-  }
-
-  .quick-links {
-    font-size: 22px;
-    text-underline-offset: 5px;
-  }
-
-  .info-links {
-    font-size: 22px;
-    text-underline-offset: 5px;
-  }
-
-  .questions {
-    height: auto;
-    min-height: 45px;
-    padding: 10px 12px;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  .btn {
-    height: 40px;
-    width: 90px;
-  }
-}
-
-.receipt-img{
-  height: 5in;
-}
-
-
-.image-container{
-
-  object-fit: contain;
-  margin-left: 40%;
-  height: 5in;
-  width: 20%;
-
-
-}
-
-.navigation-btn{
-
-  height: 30px;
-  border: none;
-
-}
-
-.navigation-btn:hover{
-
-  background-color: rgb(231, 216, 156);
-  height: 30px;
-
-}
-
-
-.backup-link{
-
-  color: white;
-  text-decoration: underline  4px white;
-  text-underline-offset: 5px;
-
-}
-
-.backup-link:hover{
-
-  text-decoration: underline  4px rgb(5, 185, 250);
-    text-underline-offset: 5px;
-
-
-}
-
-
-.delete-btn{
-
-  height:  0.4in;
-  width: 8%;
-  background-color: rgb(186, 9, 9);
-  border: none;
-  border-radius: 4%;
-  font-weight: 600;
-  /* background-color:  red; */
-}
-
-
-.delete-btn:hover{
-  background-color: rgb(242, 4, 4);
+.setting-btn:hover {
+  text-decoration: underline black;
+  text-underline-offset: 10px;
 }

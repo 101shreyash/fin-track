@@ -32,18 +32,26 @@ function NavBar() {
       <Link to="/profile" className="common-links">
         Records
       </Link>
+      &nbsp; &nbsp; &nbsp;
+
       <Link to="/receipts" className="common-links">
         Receipts
       </Link>
+            &nbsp; &nbsp; &nbsp;
+
       <Link to="/faq" className="common-links">
         FAQ
       </Link>
+            &nbsp; &nbsp; &nbsp;
+
       <button
         onClick={Logout}
-        style={{ border: "none", background: "none" }}
+        style={{ border: "none", background: "none",  fontSize : "20px"}}
         className="common-links"
       >
         Logout
+              &nbsp; &nbsp; &nbsp;
+
       </button>
       <Link to="/setting" className="common-links">Setting</Link>
     </>

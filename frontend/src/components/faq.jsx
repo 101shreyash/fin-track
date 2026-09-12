@@ -43,15 +43,15 @@ function FrequentQuestions() {
   return (
     <div style={{ marginTop: "3%" }}>
       <h1 className="main-head"> # Frequently Asked Questions</h1>
-      <h3 onClick={FAQ1} className="sub-head" className="questions"> What can I track with FinTrack?</h3>
+      <h3 onClick={FAQ1} className="questions"> What can I track with FinTrack?</h3>
       <p style={{ fontSize: "20px" }}>{faq1}</p>
-      <h3 onClick={FAQ2} className="sub-head" className="questions"> Can I use my own currency? </h3>
+      <h3 onClick={FAQ2} className="questions"> Can I use my own currency? </h3>
      <p style={{ fontSize: "20px" }}>{faq2}</p>
-      <h3 onClick={FAQ3} className="sub-head" className="questions"> What if I have income from different places? </h3>
+      <h3 onClick={FAQ3} className="questions"> What if I have income from different places? </h3>
       <p style={{ fontSize: "20px" }}>{faq3}</p>
-      <h3 onClick={FAQ4} className="sub-head" className="questions">  Can I look back at my spending ?</h3>
+      <h3 onClick={FAQ4}  className="questions">  Can I look back at my spending ?</h3>
      <p style={{ fontSize: "20px" }}>{faq4}</p>
-      <h3 onClick={FAQ5} className="sub-head" className="questions">Is FinTrack going to tell me how to spend my money? ?</h3>
+      <h3 onClick={FAQ5} className="questions">Is FinTrack going to tell me how to spend my money? ?</h3>
       <p style={{ fontSize: "20px" }}>{faq5}</p>
 
 

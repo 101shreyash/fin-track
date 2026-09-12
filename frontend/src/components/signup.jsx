@@ -108,7 +108,7 @@ function Signup() {
         <br />
         <p>
           Alredy Have an account ?{" "}
-          <Link to="/login" className="footer-link">
+          <Link to="/login" className="common-links">
             Login Now
           </Link>
         </p>
