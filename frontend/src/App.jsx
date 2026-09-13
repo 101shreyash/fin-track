@@ -12,6 +12,7 @@ import UserReceipts from "./components/receipts";
 import Usersetting from "./components/setting";
 import  DeleteAccount from "./components/delete";
 import Password from "./components/password";
+import ChangeDisplayName from "./components/displayname";
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
     <Route path="/setting" element ={<Usersetting/>}/>
     <Route path="/setting/delete" element ={<DeleteAccount/>}/>
     <Route path="/setting/password" element ={<Password/>}/>
+    <Route path="/setting/changename" element ={<ChangeDisplayName/>}/>
     <Route path="*" element ={<h1 style={{textAlign : "center" , marginTop : "10%"}}>404 Page Not found</h1>}/>
 
 

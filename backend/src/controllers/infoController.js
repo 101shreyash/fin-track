@@ -2,7 +2,7 @@ import pool from "../db.js";
 
 function userInfo(req, res) {
   const userid = req.user.userid;
-  const currencytype = req.body.currency;
+  const currencytype = req.body.currency.toUpperCase();
   const fullname = req.body.fullname;
 
   if (fullname === "fullname") {

@@ -1,43 +1,38 @@
 // Global Installation
 
-import express from "express"
+import express from "express";
 import jwt from "jsonwebtoken";
 import cookieParser from "cookie-parser";
-import "dotenv/config"
-import cors from "cors"
+import "dotenv/config";
+import cors from "cors";
 
 // Routers
 
 import authrouter from "./routes/authroutes.js";
 import infoRouter from "./routes/infoRoute.js";
-import financeRouter from "./routes/financeRoute.js"
-import profileRouter from "./routes/profileRoute.js"
-import settingRouter from "./routes/settingRoutes.js"
-
+import financeRouter from "./routes/financeRoute.js";
+import profileRouter from "./routes/profileRoute.js";
+import settingRouter from "./routes/settingRoutes.js";
 
 const app = express();
-const port = process.env.EXPRESSPORT
-
-
+const port = process.env.EXPRESSPORT;
 
 app.use(express.json());
-app.use(express.urlencoded({extended : true}));
-app.use(cookieParser())
-app.use(cors({
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  }),
+);
 
+app.use("/auth", authrouter);
+app.use("/api", infoRouter);
+app.use("/api", financeRouter);
+app.use("/api", profileRouter);
+app.use("/api", settingRouter);
 
-  origin : "http://localhost:5173",
-  credentials : true,
-
-
-}))
-
-
-app.use("/auth" , authrouter)
-app.use("/api" , infoRouter)
-app.use("/api" , financeRouter)
-app.use("/api" , profileRouter)
-app.use("/api" , settingRouter)
-
-
-app.listen(port , (() => {console.log(`App is listening on ${port}`)}))
+app.listen(port, () => {
+  console.log(`App is listening on ${port}`);
+});
