@@ -1,12 +1,18 @@
 
+body{
+  background-color: black;
+  color: white;
+}
+
+
 .common-links {
   text-decoration: none;
   font-size: 20px;
-  color: black;
+  color: white;
 }
 
 .common-links:hover {
-  text-decoration: underline black;
+  text-decoration: underline white;
   text-underline-offset: 5px;
 }
 
@@ -14,20 +20,44 @@
   height: 0.5in;
   align-content: center;
   padding-left: 1%;
-  background-color: rgb(212, 211, 211);
+  background-color: rgb(78, 75, 75);
 }
 
 .questions:hover {
-  background-color: rgb(192, 191, 191);
+  background-color: rgb(50, 49, 49);
 }
 
 .setting-btn {
   font-size: 20px;
-  color: black;
+  color: white;
   text-decoration: none;
 }
 
 .setting-btn:hover {
-  text-decoration: underline black;
+  text-decoration: underline white;
   text-underline-offset: 10px;
 }
+
+.receipt-img{
+
+height: 6in;
+object-fit: cover;
+
+}
+
+.btn{
+  width: 5%;
+  height: 0.3in;
+  background-color: rgb(79, 76, 76);
+  border: none;
+  color: white;
+}
+
+
+.btn:hover{
+
+    background-color: rgb(60, 57, 57);
+
+}
+
+

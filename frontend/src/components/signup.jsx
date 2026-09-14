@@ -103,7 +103,7 @@ function Signup() {
           {...register("password")}
         />
         &nbsp;&nbsp;
-        <button type="submit">Signup</button>
+        <button type="submit" className="btn">Signup</button>
         <br />
         <br />
         <p>

@@ -69,7 +69,7 @@ function Login() {
           {...register("password")}
         />
         &nbsp;&nbsp;
-        <button type="submit">Login</button>
+        <button type="submit" className="btn">Login</button>
         <br />
         <br />
         <p>

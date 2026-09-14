@@ -54,14 +54,16 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: receipt; Type: TABLE; Schema: public; Owner: -
+-- Name: userinfo; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.receipt (
+CREATE TABLE public.userinfo (
     userid integer NOT NULL,
     finance_id integer NOT NULL,
     receipt_img_url text,
-    receipt_id integer NOT NULL
+    receipt_id integer NOT NULL,
+    notes text,
+    note_id integer NOT NULL
 );
 
 
@@ -82,7 +84,7 @@ CREATE SEQUENCE public.receipt_receipt_id_seq
 -- Name: receipt_receipt_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.receipt_receipt_id_seq OWNED BY public.receipt.receipt_id;
+ALTER SEQUENCE public.receipt_receipt_id_seq OWNED BY public.userinfo.receipt_id;
 
 
 --
@@ -104,7 +106,6 @@ CREATE TABLE public.userfinance (
     day_income integer DEFAULT 0,
     day_expenses integer DEFAULT 0,
     spent_at character varying(50) DEFAULT 'Personal Use'::character varying,
-    note text,
     todays_date timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     finance_month public.todays_month NOT NULL,
     gained_at character varying(50) DEFAULT 'Usual Paychecks'::character varying NOT NULL
@@ -129,6 +130,26 @@ CREATE SEQUENCE public.userfinance_finance_id_seq
 --
 
 ALTER SEQUENCE public.userfinance_finance_id_seq OWNED BY public.userfinance.finance_id;
+
+
+--
+-- Name: userinfo_note_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.userinfo_note_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: userinfo_note_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.userinfo_note_id_seq OWNED BY public.userinfo.note_id;
 
 
 --
@@ -166,17 +187,24 @@ ALTER SEQUENCE public.users_userid_seq OWNED BY public.users.userid;
 
 
 --
--- Name: receipt receipt_id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.receipt ALTER COLUMN receipt_id SET DEFAULT nextval('public.receipt_receipt_id_seq'::regclass);
-
-
---
 -- Name: userfinance finance_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.userfinance ALTER COLUMN finance_id SET DEFAULT nextval('public.userfinance_finance_id_seq'::regclass);
+
+
+--
+-- Name: userinfo receipt_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.userinfo ALTER COLUMN receipt_id SET DEFAULT nextval('public.receipt_receipt_id_seq'::regclass);
+
+
+--
+-- Name: userinfo note_id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.userinfo ALTER COLUMN note_id SET DEFAULT nextval('public.userinfo_note_id_seq'::regclass);
 
 
 --
@@ -187,10 +215,10 @@ ALTER TABLE ONLY public.users ALTER COLUMN userid SET DEFAULT nextval('public.us
 
 
 --
--- Name: receipt receipt_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: userinfo receipt_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.receipt
+ALTER TABLE ONLY public.userinfo
     ADD CONSTRAINT receipt_pkey PRIMARY KEY (receipt_id);
 
 
@@ -227,18 +255,18 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: receipt receipt_finance_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: userinfo receipt_finance_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.receipt
+ALTER TABLE ONLY public.userinfo
     ADD CONSTRAINT receipt_finance_id_fkey FOREIGN KEY (finance_id) REFERENCES public.userfinance(finance_id) ON DELETE CASCADE;
 
 
 --
--- Name: receipt receipt_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: userinfo receipt_userid_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.receipt
+ALTER TABLE ONLY public.userinfo
     ADD CONSTRAINT receipt_userid_fkey FOREIGN KEY (userid) REFERENCES public.users(userid);
 
 
@@ -268,4 +296,5 @@ INSERT INTO public.schema_migrations (version) VALUES
     ('20260905125635'),
     ('20260909075245'),
     ('20260909080051'),
-    ('20260910151247');
+    ('20260910151247'),
+    ('20260914153225');

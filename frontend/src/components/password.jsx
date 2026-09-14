@@ -39,7 +39,7 @@ function Password() {
 
      if (msg.message === "New password must have at least 8 chracters. Please try again" && result.status === 400)  {
           reset();
-         return toast.error(  "New password must have at least 8 chracters. Please try again", { duration: 3700 })
+         return toast.error("New password must have at least 8 chracters. Please try again", { duration: 3700 })
 
         }
 
@@ -54,7 +54,7 @@ function Password() {
         if (result.status === 401 && msg.message === "Current Password Did'nt Matched please try again.") {
 
          reset();
-         return  toast.error("Current Password Did'nt Matched please try again with valid one" , {duration : 3200})
+         return  toast.error("Current Password did'nt Matched please try again with valid one" , {duration : 3200})
 
         }
 
@@ -115,8 +115,8 @@ function Password() {
           {...register("retypedpassword")}
         />
         <br />
-        <br />
-        <button>Change password</button>
+        <br /><br />
+        <button style={{width : "7%" , height : "0.4in"}} className="btn">Change password</button>
       </form>
     </div>
   );

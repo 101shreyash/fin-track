@@ -33,7 +33,7 @@ function DeleteAccount() {
 
     if (result.status === 400 && msg.message === "Password didn't matched delete operation failed" && msg.success === false) {
 
-      toast.error("Password didn't matched account deletation failed" , {duration : 2100})
+      toast.error("Password didn't matched account deletation failed" , {duration : 1800})
       return reset();
     }
 
@@ -77,13 +77,13 @@ function DeleteAccount() {
       <p style={{ fontSize: "20px"}}> <strong> Your account is linked to your financial history which means deleting your account would delete all of your records:</strong> </p>
 
       <p style={{fontSize: "18px", fontWeight : "800"}}>
-       So Before continuing, make sure you have exported or <Link className="backup-link">Backedup</Link> up anything
+       So Before continuing, make sure you have exported or <Link style={{fontSize : "24px"}} className="common-links">Backedup</Link> up anything
         you may want to keep.
       </p>
 
-      <h3 style={{color: "red"}}  >
+      <h2 style={{color: "red"}}  >
       And This action cannot  undone.
-      </h3>
+      </h2>
 
       <p style={{ fontSize: "17px"}}>
         If you are certain you want to permanently remove your FinTrack
@@ -98,7 +98,7 @@ function DeleteAccount() {
   <input style={{height : "0.3in"}} type="password" placeholder="Enter your password"  required {...register("password")}/>
 
  &nbsp; &nbsp;
-      <button className="delete-btn"> DELETE ACCOUNT</button>
+      <button style={{backgroundColor : "red" , border : "none"}}> DELETE ACCOUNT</button>
       </form>
 
     </div>

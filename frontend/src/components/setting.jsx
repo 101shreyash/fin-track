@@ -65,7 +65,7 @@ return <div style={{marginTop : "4%" , textAlign : "center"}}>
 
 </select>
 
- &nbsp; &nbsp; <button>Submit</button>
+ &nbsp; &nbsp; <button className="btn">Submit</button>
 
 
 </form>

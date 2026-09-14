@@ -36,13 +36,11 @@ function UserReceipts() {
         </select>
       </form>
       <h1 className="main-head">{choosedmonth} Receipts</h1>
-      <div className="image-container">
-        <img src="#" alt="receipt" className="receipt-img" />
-      </div>
-      <br />
-      <button className="navigation-btn"> &lt; prev </button>
+        <img src="./image.png" alt="receipt" className="receipt-img" />
+      <br /><br />
+      <button className="btn"> &lt; prev </button>
       &nbsp; &nbsp;
-      <button className="navigation-btn"> &gt; next </button>
+      <button className="btn"> &gt; next </button>
     </div>
   );
 }

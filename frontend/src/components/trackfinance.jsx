@@ -3,10 +3,42 @@ import NavBar from "./navbar";
 import { useEffect } from "react";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+import { useForm } from "react-hook-form";
 
 function TrackFinance() {
   let [username, setusername] = useState("");
   let [currencytype, setcurrencytype] = useState("");
+  let {register , handleSubmit} = useForm();
+
+
+
+  // Tracking User finance
+
+   async function NetworkCall(data) {
+
+    try {
+
+      const expenseNumber = data.expenseNumber
+      const spentAt = data.spenat
+      const profileNumber = data.expenseNumber
+      const earnedFrom = data.earnedfrom
+      const note = data.financenote
+      const receiptIMG = data.receiptimg[0]
+
+
+
+
+    }
+
+     catch (error) {
+
+      console.log(error);
+      toast.error(error.message)
+
+    }
+
+  }
+
 
   const navigate = useNavigate();
 
@@ -52,10 +84,12 @@ function TrackFinance() {
     year: "numeric",
   });
 
+
+
+
   return (
     <div style={{ marginTop: "2%", textAlign: "center" }}>
       <NavBar />
-
       <br />
       <br />
       <br />
@@ -64,21 +98,11 @@ function TrackFinance() {
 
       <h1 className="sub-head"> Its {year} </h1>
       <h2 className="sub-head">How much was your today's Expense</h2>
-      <input
-        style={{ height: "0.3in", width: "3in" }}
-        className="initial-input"
-        type="number"
-        placeholder={`0 ${currencytype}$`}
-      />
+   <input style={{ height: "0.3in", width: "3in" }} type="number" placeholder={`0 ${currencytype}$`} {...register("expenseNumber")}/>
       <h2 className="sub-head">Spent On?</h2>
-      <form>
-        <select
-          required
-          className="select-currency"
-          style={{ height: "0.3in", width: "3in" }}
-        >
-          <option hidden>Select Category</option>
-
+      <form onSubmit={handleSubmit(NetworkCall)}>
+        <select required  style={{ height: "0.3in", width: "3in" }} {...register("spentat")} >
+          <option hidden>No Expenses</option>
           <option>Shopping</option>
           <option>Food & Dining</option>
           <option>Groceries</option>
@@ -104,21 +128,14 @@ function TrackFinance() {
           <option>Pets</option>
           <option>Taxes</option>
           <option>Others</option>
+          <option>No Expenses</option>
+
         </select>
         <h2 className="sub-head">How much Profit You had Today</h2>
-        <input
-          className="initial-input"
-          type="number"
-          placeholder={`0 ${currencytype}$`}
-          style={{ height: "0.3in", width: "3in" }}
-        />
+        <input type="number" placeholder={`0 ${currencytype}$`}  style={{ height: "0.3in", width: "3in" }} {...register("profitNumber")} />
         <h2 className="sub-head">Earned From?</h2>
-        <select
-          required
-          className="select-currency"
-          style={{ height: "0.3in", width: "3in" }}
-        >
-          <option hidden>Select Category</option>
+        <select required   style={{ height: "0.3in", width: "3in" }} {...register("earnedfrom")} >
+          <option hidden>No Income</option>
           <option>Salary</option>
           <option>Business</option>
           <option>Freelancing</option>
@@ -143,6 +160,8 @@ function TrackFinance() {
           <option>Pension</option>
           <option>Grant / Scholarship</option>
           <option>Others</option>
+         <option>No Income</option>
+
         </select>
         <br />
         <br />
@@ -152,18 +171,16 @@ function TrackFinance() {
             width: "40%",
             height: "0.6in",
             padding: "10px 20px",
-            boxSizing: "border-box",
-            resize: "none",
           }}
           placeholder="Spent money on something I didn’t really need. I’ll be more mindful of my spending and make better financial decisions next time."
-        />
+        {...register("financenote")} />
 
         <br />
         <br />
 
         <h2 className="sub-head">Upload Receipt (OPTIONAL)</h2>
 
-        <input type="file" accept=".jpeg , .png , .jpg" />
+        <input type="file" accept=".jpeg , .png , .jpg" {...register("receiptimg")}/>
 
         <br />
         <br />
