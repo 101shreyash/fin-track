@@ -63,7 +63,8 @@ CREATE TABLE public.userinfo (
     receipt_img_url text,
     receipt_id integer NOT NULL,
     notes text,
-    note_id integer NOT NULL
+    note_id integer NOT NULL,
+    finance_month text NOT NULL
 );
 
 
@@ -297,4 +298,5 @@ INSERT INTO public.schema_migrations (version) VALUES
     ('20260909075245'),
     ('20260909080051'),
     ('20260910151247'),
-    ('20260914153225');
+    ('20260914153225'),
+    ('20260915095514');

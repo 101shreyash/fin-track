@@ -1,63 +1,61 @@
 import pool from "../db.js";
+import multer from "multer";
 
-function keepFinance(req, res) {
+const upload = multer({ dest: "receipts/" });
+
+async function keepFinance(req, res) {
   const userid = req.user.userid;
 
-  // assumed request body
+  //Expenses And Spending
 
-  const dayIncome = req.body.income === "" ? 0 : req.body.income;
-  const dayExpenses = req.body.expense === "" ? 0 : req.body.expense;
-  const spentAt = req.body.spentin;
-  const gainedAt = req.body.gainedin;
-  const note = req.body.note?.toLowerCase();
-  const fullMonth = new Date()
+  const expenseInput = req.body.expense;
+  const expense = Number(req.body.expense);
+  const spentat = req.body.spentat;
+
+  // Income And Gain
+  const income = req.body.income; // Number
+  const gainedat = req.body.gainedat; // Text
+
+  // Current  month
+  const financemonth = new Date()
     .toLocaleString("en-US", { month: "long" })
     .toLowerCase();
 
-  if (dayIncome < 0 || dayExpenses < 0) {
+  // Receipt Image Url And FinanceNotes
+  const notes = req.body.notes;
+
+  if (expenseInput.includes("+")) {
     return res.status(400).json({
-      success: false,
-      message: "You cannot insert negative values",
+      success: "false",
+      message: "Enter a valid number",
     });
   }
 
-  if (spentAt?.length > 50) {
+  if (expenseInput.includes(" ")) {
     return res.status(400).json({
-      success: false,
-      message:
-        "Spent at Description should be short eg.. Food & Grocery , Electricity Bills ..",
+      success: "false",
+      message: "Numbers Shouldnot consists of spaces please try again",
     });
   }
 
-  if (gainedAt?.length > 50) {
+  if (expense < 0) {
     return res.status(400).json({
       success: false,
-      message:
-        "Gained at Description should be short eg.. Usual Paychecks , Salary , Loan Recovered ..",
+      message: `Expense Couldnot be less than 0 Enter valid Number`,
     });
   }
 
-  async function TrackFinance() {
-    try {
-      await pool.query(
-        "INSERT INTO userfinance (userid , day_income , day_expenses , spent_at , note , finance_month) VALUES ($1,$2,$3,$4,$5,$6)",
-        [userid, dayIncome, dayExpenses, spentAt, note, fullMonth],
-      );
-
-      return res.status(200).json({
-        success: true,
-        message: "Saved the record",
-      });
-    } catch (error) {
-      console.log(error.message);
-      return res.status(500).json({
-        success: false,
-        message: "Server Error",
-      });
-    }
+  if (Number.isNaN(expense) === true) {
+    return res.status(400).json({
+      success: false,
+      message: `Enter a valid number make sure there is no Alphabets and Special Characters`,
+    });
   }
 
-  TrackFinance();
-} // keep finance Scope Ends here
+  console.log("Reached");
+  console.log(expense);
+
+
+}
 
 export default keepFinance;
