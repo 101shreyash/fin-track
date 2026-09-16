@@ -1,7 +1,4 @@
 import pool from "../db.js";
-import multer from "multer";
-
-const upload = multer({ dest: "receipts/" });
 
 async function keepFinance(req, res) {
   const userid = req.user.userid;
@@ -23,8 +20,7 @@ async function keepFinance(req, res) {
   const notes = req.body?.notes;
 
   // Receipt
-
-  const receiptimg = req.files
+  const receiptimg = req.file.filename;
 
   if (!expenseInput || expenseInput === undefined) {
     expense = 0;
@@ -117,29 +113,30 @@ async function keepFinance(req, res) {
   }
 
   if (notes?.length > 250) {
-
     return res.json({
-      success : false,
-      message : `Note too long make it a bit shorter. Don't extend it more than 250 characters right now its ${notes?.length} characters long`
-    })
-
+      success: false,
+      message: `Note too long make it a bit shorter. Don't extend it more than 250 characters right now its ${notes?.length} characters long`,
+    });
   }
-
 
   // Expenses
   console.log("expenseinput", expense);
   console.log("spentAt", spent_at);
 
-// Income
+  // Income
   console.log("incomeinput", income);
   console.log("gainedAt", gainedat);
 
-//Note
+  //Note
   console.log("note", notes);
 
-// Receipt Image
+  // Receipt Image
 
   console.log("receipt", receiptimg);
+
+  // Month
+
+  console.log(financemonth);
 }
 
 export default keepFinance;
