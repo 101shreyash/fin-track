@@ -98,7 +98,7 @@ function DeleteAccount() {
   <input style={{height : "0.3in"}} type="password" placeholder="Enter your password"  required {...register("password")}/>
 
  &nbsp; &nbsp;
-      <button style={{backgroundColor : "red" , border : "none"}}> DELETE ACCOUNT</button>
+      <button className="delete-btn"> DELETE ACCOUNT</button>
       </form>
 
     </div>

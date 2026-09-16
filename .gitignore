@@ -1,4 +1,5 @@
 backend/src/node_modules
+backend/src/receipts
 .env
 **/.env
 

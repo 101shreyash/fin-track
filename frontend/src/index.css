@@ -1,18 +1,16 @@
-
-body{
-  background-color: black;
-  color: white;
+body {
+  background: #000000;
+  color: #f0eaff;
 }
-
 
 .common-links {
   text-decoration: none;
   font-size: 20px;
-  color: white;
+  color: #b86cff;
 }
 
 .common-links:hover {
-  text-decoration: underline white;
+  text-decoration: underline #d946ef;
   text-underline-offset: 5px;
 }
 
@@ -20,44 +18,45 @@ body{
   height: 0.5in;
   align-content: center;
   padding-left: 1%;
-  background-color: rgb(78, 75, 75);
+  background-color: #151020;
 }
 
 .questions:hover {
-  background-color: rgb(50, 49, 49);
+  background-color: #211631;
 }
 
 .setting-btn {
   font-size: 20px;
-  color: white;
+
+  color: #f0eaff;
+
   text-decoration: none;
 }
 
 .setting-btn:hover {
-  text-decoration: underline white;
+  text-decoration: underline #d946ef;
+
   text-underline-offset: 10px;
 }
 
-.receipt-img{
+.receipt-img {
+  height: 6in;
 
-height: 6in;
-object-fit: cover;
-
+  object-fit: cover;
 }
 
-.btn{
+.btn {
   width: 5%;
+
   height: 0.3in;
-  background-color: rgb(79, 76, 76);
+
+  background-color: #151020;
+
   border: none;
-  color: white;
+
+  color: #f0eaff;
 }
 
-
-.btn:hover{
-
-    background-color: rgb(60, 57, 57);
-
+.btn:hover {
+  background-color: #261936;
 }
-
-
