@@ -13,28 +13,26 @@ function TrackFinance() {
   // Tracking User finance
 
   async function NetworkCall(data) {
-
     try {
-
-     // Expenses And Spent At
-      const expense = data.expenseNumber;
-      const spentAt = data.spentat;
+      // Expenses And Spent At
+      const expense = data?.expenseNumber;
+      const spentAt = data?.spentat;
 
       // Income and Gain
-      const income = data.profitNumber;
-      const earnedfrom = data.earnedfrom;
+      const income = data?.profitNumber;
+      const earnedfrom = data?.earnedfrom;
 
       // Note and Receipt
-      const notes = data.financenote;
-      const receiptIMG = data.receiptimg[0];
+      const notes = data?.financenote;
+      const receiptIMG = data?.receiptimg[0];
 
       const MultipartFormData = new FormData();
-      MultipartFormData.append("expense" , expense)
-      MultipartFormData.append("spentat" , spentAt)
-      MultipartFormData.append("income" , income)
-      MultipartFormData.append("gainedat" , earnedfrom)
-      MultipartFormData.append("notes" , notes)
-      MultipartFormData.append("receiptimg" , receiptIMG)
+      MultipartFormData.append("expense", expense);
+      MultipartFormData.append("spentat", spentAt);
+      MultipartFormData.append("income", income);
+      MultipartFormData.append("gainedat", earnedfrom);
+      MultipartFormData.append("notes", notes);
+      MultipartFormData.append("receiptimg", receiptIMG);
 
       if (notes.length > 250) {
         return toast.error(
@@ -42,34 +40,49 @@ function TrackFinance() {
         );
       }
 
-    const result = await fetch("http://localhost:8001/api/keepfinance" , {
-        method : "POST",
-        credentials : "include",
-        body : MultipartFormData
-
-      })
+      const result = await fetch("http://localhost:8001/api/keepfinance", {
+        method: "POST",
+        credentials: "include",
+        body: MultipartFormData,
+      });
 
       const msg = await result.json();
 
-      if (msg.message === "Session Expired try to login Again" && result.status === 401 && msg.success === false) {
-
-        navigate("/login")
-        return toast.error("Session Expired try to login Again" , {duration : 2000})
-
+      if (
+        msg.message ===
+          "Expnese Should not consits of any letters or special symbols. Enter valid Number" &&
+        msg.success === false &&
+        result.status === 400
+      ) {
+        return toast.error(
+          "Expnese Should not consits of any letters or special symbols. Enter valid Number",
+          { duration: 3000 },
+        );
       }
 
-      console.log(msg);
+      if (
+        msg.message === "Session Expired try to login Again" &&
+        result.status === 401 &&
+        msg.success === false
+      ) {
+        navigate("/login");
+        return toast.error("Session Expired try to login Again", {
+          duration: 2000,
+        });
+      }
 
-
-    }
-
-    catch (error) {
+      if (
+        msg.message === "Financial Record Saved" &&
+        result.status === 200 &&
+        msg.success === true
+      ) {
+        toast.success("Financial Record Saved", { duration: 2000 });
+        return reset();
+      }
+    } catch (error) {
       console.log(error);
       toast.error(error.message);
     }
-
-
-
   }
 
   const navigate = useNavigate();
@@ -109,8 +122,6 @@ function TrackFinance() {
     getUsername();
   }, []);
 
-
-
   const year = new Date().toLocaleString("en-US", {
     month: "long",
     day: "numeric",
@@ -119,43 +130,39 @@ function TrackFinance() {
   });
 
   return (
-    <div style={{ marginTop: "2%", textAlign: "center" }}>
+    <div style={{ marginTop: "1%", textAlign: "center" }}>
       <NavBar />
       <br />
       <br />
-      <br />
-
       <h1 className="sub-head"> Welcome , {username} </h1>
-
       <h1 className="sub-head"> Its {year} </h1>
 
       <form onSubmit={handleSubmit(NetworkCall)}>
-        <h2 className="sub-head">How much was your today's Expense</h2>
+        <h2 className="sub-head">How much was your today's Expense (If Any )</h2>
         <input
           min="0"
-          style={{ height: "0.3in", width: "3in" }}
+          style={{ height: "0.4in", width: "3in" }}
           type="number"
           placeholder={`0 ${currencytype}$`}
           {...register("expenseNumber")}
         />
-        <h2 className="sub-head">Spent On?</h2>
+        <h2 className="sub-head">Spent On? (If Any ) </h2>
         <select
           required
-          style={{ height: "0.3in", width: "3in" }}
-          {...register("spentat")}
-        >
+          style={{ height: "0.4in", width: "3in" }}
+          {...register("spentat")}>
           <option hidden>No Expenses</option>
           <option>Shopping</option>
-          <option>Food & Dining</option>
+          <option>Food And Dining</option>
           <option>Groceries</option>
           <option>Transportation</option>
-          <option>Fuel / Gas</option>
+          <option>Fuel Or Gas</option>
           <option>Rent</option>
           <option>Utilities</option>
           <option>Electricity</option>
           <option>Internet</option>
-          <option>Phone / Mobile</option>
-          <option>Health & Medical</option>
+          <option>Technology Expense</option>
+          <option>Health And Medical</option>
           <option>Education</option>
           <option>Entertainment</option>
           <option>Travel</option>
@@ -163,30 +170,29 @@ function TrackFinance() {
           <option>Subscriptions</option>
           <option>Insurance</option>
           <option>Personal Care</option>
-          <option>Fitness & Sports</option>
-          <option>Gifts & Donations</option>
-          <option>Home & Household</option>
+          <option>Fitness And Sports</option>
+          <option>Gifts And Donations</option>
+          <option>Home And Household</option>
           <option>Electronics</option>
           <option>Pets</option>
           <option>Taxes</option>
           <option>Others</option>
           <option>No Expenses</option>
         </select>
-        <h2 className="sub-head">How much Profit You had Today</h2>
+        <h2 className="sub-head">How much Profit You had Today (If Any)</h2>
         <input
           type="number"
           min="0"
           placeholder={`0 ${currencytype}$`}
-          style={{ height: "0.3in", width: "3in" }}
+          style={{ height: "0.4in", width: "3in" }}
           {...register("profitNumber")}
         />
-        <h2 className="sub-head">Earned From?</h2>
+        <h2 className="sub-head">Earned From? (If Any)</h2>
         <select
           required
-          style={{ height: "0.3in", width: "3in" }}
-          {...register("earnedfrom")}
-        >
-          <option hidden>No Earnings</option>
+          style={{ height: "0.5in", width: "3in" }}
+          {...register("earnedfrom")} >
+          <option hidden>No Earnings </option>
           <option>Salary</option>
           <option>Business</option>
           <option>Freelancing</option>
@@ -209,11 +215,10 @@ function TrackFinance() {
           <option>Gifts</option>
           <option>Allowance</option>
           <option>Pension</option>
-          <option>Grant / Scholarship</option>
+          <option>Grant And Scholarship</option>
           <option>Others</option>
           <option>No Earnings</option>
         </select>
-        <br />
         <br />
         <h2 className="sub-head">Any Note? (Optional)</h2>
         <textarea

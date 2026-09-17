@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 function signup(req, res) {
   const username = req.body?.username?.toLowerCase();
   const password = req.body.password;
+  const confirmpassword = req.body.confirmpassword;
 
   if (!username) {
     return res.status(400).json({
@@ -42,6 +43,25 @@ function signup(req, res) {
       message: "Password should'nt contain less than 8 characters",
     });
   }
+
+  if (!confirmpassword) {
+
+   return res.status(400).json({
+      success: false,
+      message: "Confirm Password is required",
+    });
+
+  }
+
+  if (password !== confirmpassword) {
+
+    return res.status(401).json({
+      success: false,
+      message: "Confirmation Password didn't matched please try again",
+    });
+
+  }
+
 
   async function DbCall() {
     const hashpassword = await bcrypt.hash(password, 13);

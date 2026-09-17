@@ -42,7 +42,9 @@ function Usersetting() {
 
   return (
     <div style={{ marginTop: "4%", textAlign: "center" }}>
+
       <h1 style={{ fontSize: "40px" }}>User Settings </h1>
+        <Link style={{fontSize : "30px" , color : "white", textUnderlineOffset : "10px"}} to="/faq" className="common-links">Frequently Asked Questions</Link>
       <br />
 
       <br />

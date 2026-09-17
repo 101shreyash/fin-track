@@ -9,16 +9,17 @@ function UserReceipts() {
   let [choosedmonth, setchoosedmonth] = useState(defaultmonth);
 
   function AfterSubmit(data) {
-    return setchoosedmonth(data.choosedmonth);
+     setchoosedmonth(data.choosedmonth);
+
+    console.log(data.choosedmonth);
+
   }
 
   return (
     <div style={{ marginTop: "6%", textAlign: "center" }}>
       <form onChange={handleSubmit(AfterSubmit)}>
         <h1 className="main-head">Select Month</h1>
-        <select
-          style={{ height: "0.5in", width: "12%" }}
-          {...register("choosedmonth")}
+        <select style={{ height: "0.5in", width: "12%" }}  {...register("choosedmonth")}
         >
           <option hidden>{defaultmonth}</option>
           <option>january</option>

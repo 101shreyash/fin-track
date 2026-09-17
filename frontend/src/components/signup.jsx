@@ -10,10 +10,15 @@ function Signup() {
     try {
       const username = data.username;
       const password = data.password;
+      const confirmpassword = data.confirmpassword;
 
       const result = await fetch("http://localhost:8001/auth/signup", {
         method: "POST",
-        body: JSON.stringify({ username: username, password: password }),
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          confirmpassword: confirmpassword,
+        }),
         headers: {
           "Content-type": "application/json",
         },
@@ -69,6 +74,17 @@ function Signup() {
       }
 
       if (
+        result.status === 401 &&
+        msg.success === false &&
+        msg.message === "Confirmation Password didn't matched please try again"
+      ) {
+        toast.error("Confirmation Password didn't matched please try again", {
+          duration: 2000,
+        });
+        return reset();
+      }
+
+      if (
         (result.status === 200) & (msg.success === true) &&
         msg.message === "Signup Sucessfull"
       ) {
@@ -102,8 +118,19 @@ function Signup() {
           required
           {...register("password")}
         />
+        &nbsp; &nbsp;
+        <input
+          style={{ height: "0.3in" }}
+          className="initial-input"
+          type="password"
+          placeholder="Confirm your password"
+          required
+          {...register("confirmpassword")}
+        />
         &nbsp;&nbsp;
-        <button type="submit" className="btn">Signup</button>
+        <button type="submit" className="btn">
+          Signup
+        </button>
         <br />
         <br />
         <p>

@@ -20,7 +20,7 @@ async function keepFinance(req, res) {
   const notes = req.body?.notes;
 
   // Receipt
-  const receiptimg = req.file.filename;
+  const receiptimg = req.file?.filename;
 
   if (!expenseInput || expenseInput === undefined) {
     expense = 0;
@@ -113,30 +113,35 @@ async function keepFinance(req, res) {
   }
 
   if (notes?.length > 250) {
-    return res.json({
+    return res.status(400).json({
       success: false,
       message: `Note too long make it a bit shorter. Don't extend it more than 250 characters right now its ${notes?.length} characters long`,
     });
   }
 
-  // Expenses
-  console.log("expenseinput", expense);
-  console.log("spentAt", spent_at);
+  try {
+    const result = await pool.query(
+      "INSERT INTO userfinance (userid, day_income , gained_at , day_expenses , spent_at , finance_month) VALUES ($1,$2,$3,$4,$5,$6) RETURNING userfinance.finance_id",
+      [userid, income, gainedat, expense, spent_at, financemonth],
+    );
 
-  // Income
-  console.log("incomeinput", income);
-  console.log("gainedAt", gainedat);
+    const financeId = result.rows[0].finance_id;
 
-  //Note
-  console.log("note", notes);
+    await pool.query(
+      "INSERT INTO userinfo (userid , finance_id ,  receipt_img_url , notes , finance_month) VALUES ($1,$2,$3,$4,$5);",
+      [userid, financeId, receiptimg, notes, financemonth],
+    );
 
-  // Receipt Image
-
-  console.log("receipt", receiptimg);
-
-  // Month
-
-  console.log(financemonth);
+    return res.status(200).json({
+      success: true,
+      message: "Financial Record Saved",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Server Error",
+    });
+  }
 }
 
 export default keepFinance;

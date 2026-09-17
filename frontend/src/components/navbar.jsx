@@ -38,12 +38,6 @@ function NavBar() {
         Receipts
       </Link>
             &nbsp; &nbsp; &nbsp;
-
-      <Link to="/faq" className="common-links">
-        FAQ
-      </Link>
-            &nbsp; &nbsp; &nbsp;
-
       <button
         onClick={Logout}
         style={{ border: "none", background: "none",  fontSize : "20px"}}

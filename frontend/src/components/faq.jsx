@@ -6,6 +6,8 @@ function FrequentQuestions() {
   let [faq3, setfaq3] = useState("");
   let [faq4, setfaq4] = useState("");
   let [faq5, setfaq5] = useState("");
+  let [faq6, setfaq6] = useState("");
+  let [faq7, setfaq7] = useState("");
 
   function FAQ1() {
     setfaq1(
@@ -38,6 +40,19 @@ function FrequentQuestions() {
     );
   }
 
+  function FAQ6() {
+    setfaq6(
+      "No Worries , If You dont have any expenses today or any income or don't have any receipts image then you're free to skip those section ,  Required Forms Should Be Filled only when you got something to add.",
+    );
+  }
+
+
+  function FAQ7() {
+    setfaq7(
+      "Of Course You can Delete Your account (which deletes every records you have) And then stop using our application.",
+    );
+  }
+
 
 
   return (
@@ -53,6 +68,13 @@ function FrequentQuestions() {
      <p style={{ fontSize: "20px" }}>{faq4}</p>
       <h3 onClick={FAQ5} className="questions">Is FinTrack going to tell me how to spend my money? ?</h3>
       <p style={{ fontSize: "20px" }}>{faq5}</p>
+      <h3 onClick={FAQ6} className="questions">What If I dont have any Expenses or Income ?</h3>
+      <p style={{ fontSize: "20px" }}>{faq6}</p>
+    <h3 onClick={FAQ7} className="questions">Can I delete my account permently if i don't like services of this app ?</h3>
+      <p style={{ fontSize: "20px" }}>{faq7}</p>
+
+
+
 
 
     </div>
