@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import NavBar from "./navbar";
+import CalenderPicker from "./DatePicker";
 
 function UserProfile() {
   const year = new Date().toLocaleString("en-US", {
@@ -31,28 +32,12 @@ function UserProfile() {
       <NavBar />
       <br />
       <br />
-      <h1 className="sub-head">Welcome Shreyash , Its {year}</h1>
+      <h1>Welcome Shreyash , Its {year}</h1>
       <br />
-      <br />
-      <h1
-        className="sub-head"
-        style={{
-          textDecoration: "underline white 8px",
-          textUnderlineOffset: "10px",
-        }}
-      >
-        {month} {day} RECORDS{" "}
-      </h1>
-      <p style={{ fontSize: "30px" }} className="sub-head">
-        {" "}
-        Expenses : $0{" "}
-      </p>
-      <p style={{ fontSize: "30px" }} className="sub-head">
-        {" "}
-        Income : $0
-      </p>
+      <h3>Select an appropriate date and view record</h3>
+      <CalenderPicker/>
+    <h1>View Total Summary of the Selected Month</h1>
       <form onSubmit={handleSubmit(ViewDetails)}>
-        <h1>View Total Expenses And Income of The Month</h1>
         <select
           style={{ height: "0.4in", width: "3in" }}
           {...register("selectmonth")}
@@ -91,8 +76,15 @@ function UserProfile() {
         )}
         {selectedmonth ? (
           <p style={{ fontSize: "30px" }} className="sub-head">
-            {" "}
-            Total Expenses : $0{" "}
+            Total Expenses : $0
+          </p>
+        ) : (
+          ""
+        )}
+        {selectedmonth ? (
+          <p style={{ fontSize: "30px" }} className="sub-head">
+
+            Total Income : $0
           </p>
         ) : (
           ""
@@ -100,15 +92,7 @@ function UserProfile() {
         {selectedmonth ? (
           <p style={{ fontSize: "30px" }} className="sub-head">
             {" "}
-            Total Income : $0{" "}
-          </p>
-        ) : (
-          ""
-        )}
-        {selectedmonth ? (
-          <p style={{ fontSize: "30px" }} className="sub-head">
-            {" "}
-            Spent Mostly On : CatergoryX{" "}
+            Spent Mosty On : CatergoryX{" "}
           </p>
         ) : (
           ""

@@ -1,7 +1,7 @@
 function AboutUs() {
   return (
     <div style={{paddingLeft : "1%"}}>
-      <h1 className="main-head" style={{textDecoration : "underline yellow" , textUnderlineOffset : "10px"}}>About Us</h1>
+      <h1 className="main-head" style={{textDecoration : "underline plum" , textUnderlineOffset : "10px"}}>About Us</h1>
 
       <p style={{fontSize : "20px"}}>
         Money comes in , goes out and you have no idea where

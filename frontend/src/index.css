@@ -50,7 +50,7 @@ body {
 
   height: 0.3in;
 
-  background-color: #151020;
+  background-color: #2a1e44;
 
   border: none;
 
@@ -58,5 +58,23 @@ body {
 }
 
 .btn:hover {
-  background-color: #261936;
+  background-color: #915fc0;
+}
+
+
+.date-picker{
+
+  cursor: pointer;
+  background-color: black;
+  border: 2px solid #b86cff;
+  height: 0.4in;
+  text-align: center;
+  color: white;
+
+}
+
+
+.date-picker::placeholder{
+
+  color: #b86cff;
 }
