@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
+import { useInsertionEffect, useState } from "react";
 import NavBar from "./navbar";
 import CalenderPicker from "./DatePicker";
+import toast from "react-hot-toast";
 
 function UserProfile() {
   const year = new Date().toLocaleString("en-US", {
@@ -19,8 +20,46 @@ function UserProfile() {
   let { register, handleSubmit } = useForm();
   let [selectedmonth, setselectedmonth] = useState("");
 
-  function ViewDetails(data) {
+  let [totalincome, settotalincome] = useState();
+  let [totalexpense, settotalexpense] = useState();
+
+  let navigate = useNavigate();
+
+  async function ViewDetails(data) {
     setselectedmonth(data.selectmonth);
+    const choosenMonth = data.selectmonth;
+
+    try {
+      const result = await fetch(
+        `http://localhost:8001/api/monthsummary/${choosenMonth}`,
+        {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-type": "application/json",
+          },
+        },
+      );
+
+      const msg = await result.json();
+
+      if (
+        (msg.message === "Session Expired try to login Again" &&
+          msg.success === false,
+        result.status === 401)
+      ) {
+        navigate("/login");
+        return toast.error("Session Expired try to login Again", {
+          duration: 2000,
+        });
+      }
+
+      settotalincome(msg.message.totalincome);
+      settotalexpense(msg.message.totalexpenses);
+    } catch (error) {
+      toast.error("Server Error");
+      console.log(error.message);
+    }
   }
 
   return (
@@ -32,11 +71,11 @@ function UserProfile() {
       <NavBar />
       <br />
       <br />
-      <h1>Welcome Shreyash , Its {year}</h1>
+      <h1>Welcome Shreyash, Its {year}</h1>
       <br />
       <h3>Select an appropriate date and view record</h3>
-      <CalenderPicker/>
-    <h1>View Total Summary of the Selected Month</h1>
+      <CalenderPicker />
+      <h1>View Total Summary of the Selected Month</h1>
       <form onSubmit={handleSubmit(ViewDetails)}>
         <select
           style={{ height: "0.4in", width: "3in" }}
@@ -61,30 +100,17 @@ function UserProfile() {
           View
         </button>
         {selectedmonth ? (
-          <h1
-            className="sub-head"
-            style={{
-              textDecoration: "underline white 8px",
-              textUnderlineOffset: "10px",
-            }}
-          >
+          <h1 style={{ fontSize: "60px" }}>{selectedmonth} Records</h1>
+        ) : (
+          ""
+        )}
+        {selectedmonth ? (
+          <p style={{ fontSize: "30px" }} className="sub-head">
             {" "}
-            {selectedmonth} RECORDS{" "}
-          </h1>
-        ) : (
-          ""
-        )}
-        {selectedmonth ? (
-          <p style={{ fontSize: "30px" }} className="sub-head">
-            Total Expenses : $0
-          </p>
-        ) : (
-          ""
-        )}
-        {selectedmonth ? (
-          <p style={{ fontSize: "30px" }} className="sub-head">
-
-            Total Income : $0
+            Total Income :{" "}
+            {totalincome
+              ? totalincome
+              : "Income is not Recorded for this month"}{" "}
           </p>
         ) : (
           ""
@@ -92,15 +118,10 @@ function UserProfile() {
         {selectedmonth ? (
           <p style={{ fontSize: "30px" }} className="sub-head">
             {" "}
-            Spent Mosty On : CatergoryX{" "}
-          </p>
-        ) : (
-          ""
-        )}
-        {selectedmonth ? (
-          <p style={{ fontSize: "30px" }} className="sub-head">
-            {" "}
-            Gained Mostly Through : CatergoryX{" "}
+            Total Expenses :{" "}
+            {totalexpense
+              ? totalexpense
+              : " Expenses is not Recorded for this month"}{" "}
           </p>
         ) : (
           ""

@@ -144,4 +144,54 @@ async function keepFinance(req, res) {
   }
 }
 
-export default keepFinance;
+async function MonthSummary(req, res) {
+  const userid = req.user.userid;
+  const month = req.params.month;
+
+  if (!month) {
+    return res.status(400).json({
+      success: false,
+      message: "Month is required",
+    });
+  }
+
+  if (
+    /^january|february|march|april|may|june|july|august|september|october|november|december$/.test(
+      month,
+    ) === false
+  ) {
+    return res.status(400).json({
+      success: false,
+      message: "Enter valid Month",
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      "SELECT SUM (day_income) AS totalincome , SUM (day_expenses) AS totalexpenses FROM userfinance WHERE userid = $1 AND finance_month = $2",
+      [userid, month],
+    );
+
+    const totalincome = result.rows[0].totalincome;
+    const totalexpenses = result.rows[0].totalexpenses;
+
+    if (totalincome === null && totalexpenses === null) {
+      return res.status(404).json({
+        success: false,
+        message: "No record Found For the Following Month",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: result.rows[0],
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).json({
+      message: "Server Error",
+    });
+  }
+}
+
+export { keepFinance, MonthSummary };
