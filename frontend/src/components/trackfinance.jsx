@@ -153,6 +153,8 @@ function TrackFinance() {
           {...register("spentat")}>
           <option hidden>No Expenses</option>
           <option>Shopping</option>
+          <option>Gambling</option>
+          <option>Prostitute</option>
           <option>Food And Dining</option>
           <option>Groceries</option>
           <option>Transportation</option>

@@ -5,13 +5,14 @@ body {
 
 .common-links {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 24px;
   color: #b86cff;
+
 }
 
 .common-links:hover {
   text-decoration: underline #d946ef;
-  text-underline-offset: 5px;
+  text-underline-offset: 15px;
 }
 
 .questions {
@@ -27,21 +28,17 @@ body {
 
 .setting-btn {
   font-size: 20px;
-
   color: #f0eaff;
-
   text-decoration: none;
 }
 
 .setting-btn:hover {
   text-decoration: underline #d946ef;
-
   text-underline-offset: 10px;
 }
 
 .receipt-img {
-  height: 6in;
-
+  height: 4in;
   object-fit: cover;
 }
 
@@ -61,20 +58,15 @@ body {
   background-color: #915fc0;
 }
 
-
-.date-picker{
-
+.date-picker {
   cursor: pointer;
   background-color: black;
   border: 2px solid #b86cff;
   height: 0.4in;
   text-align: center;
   color: white;
-
 }
 
-
-.date-picker::placeholder{
-
+.date-picker::placeholder {
   color: #b86cff;
 }
