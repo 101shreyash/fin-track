@@ -75,7 +75,7 @@ function UserReceipts() {
   return (
     <div style={{ marginTop: "6%", textAlign: "center" }}>
 
-      <form onSubmit ={handleSubmit(AfterSubmit)}>
+      <form onChange ={handleSubmit(AfterSubmit)}>
 
         <h1 className="main-head">Select Month</h1>
 
@@ -98,7 +98,6 @@ function UserReceipts() {
           <option>december</option>
         </select>
 
-       &nbsp; <button type = "submit" className="btn">Submit</button>
       </form>
 
       <br />
