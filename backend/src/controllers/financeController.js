@@ -194,4 +194,94 @@ async function MonthSummary(req, res) {
   }
 }
 
-export { keepFinance, MonthSummary };
+async function ViewReceipts(req, res) {
+  const month = req.params?.month;
+  const userid = req.user.userid;
+
+  if (!month) {
+    return res.status(400).json({
+      success: true,
+      message: "Month is required",
+    });
+  }
+
+  if (
+    /^january|february|march|april|may|june|july|august|september|october|november|december$/.test(
+      month,
+    ) === false
+  ) {
+    return res.status(400).json({
+      success: false,
+      message: "Enter Valid Month",
+    });
+  }
+
+  try {
+    const result = await pool.query(
+      "SELECT receipt_img_url FROM userinfo WHERE userid = $1 AND finance_month = $2;",
+      [userid, month],
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No receipt Recorded For the following Month",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: result.rows,
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      message: "Server Error",
+    });
+  }
+}
+
+async function DateSummary(req, res) {
+  const date = req.params.date;
+  const userid = req.user.userid;
+
+  if (!date) {
+   return res.status(400).json({
+      success: false,
+      message: "Date is required",
+    });
+  }
+
+
+  try {
+const result = await pool.query(`SELECT SUM (day_income) as totalincome , SUM (day_expenses) as totalexpense FROM userfinance WHERE userid = $1 AND todays_date :: TEXT ILIKE $2` , [userid , `${date}`] );
+
+
+
+if (result.rowCount === 0 ) {
+  return res.json({
+    success : false,
+    message : "No record Found"
+  })
+
+}
+
+return res.status(400).json({
+  success : true,
+  message : result.rows[0]
+})
+
+
+
+  }
+
+  catch (error) {
+    console.log(error);
+    return res.json({
+      success : false,
+      message: "Server Error",
+    });
+  }
+}
+
+export { keepFinance, MonthSummary, ViewReceipts, DateSummary };
