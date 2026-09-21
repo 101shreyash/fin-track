@@ -47,7 +47,7 @@ body {
 
   height: 0.3in;
 
-  background-color: #2a1e44;
+  background-color: #2f2349;
 
   border: none;
 
@@ -69,4 +69,17 @@ body {
 
 .date-picker::placeholder {
   color: #b86cff;
+}
+
+.delete-btn{
+  background-color: rgb(248, 4, 4);
+  color: white;
+  border: none;
+  height: 0.3in;
+}
+
+.delete-btn:hover{
+  background-color: rgb(184, 0, 0);
+  border: none;
+  height: 0.3in;
 }

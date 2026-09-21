@@ -118,7 +118,7 @@ function Signup() {
           required
           {...register("password")}
         />
-        &nbsp; &nbsp;
+     &nbsp;&nbsp;
         <input
           style={{ height: "0.3in" }}
           className="initial-input"
@@ -127,7 +127,8 @@ function Signup() {
           required
           {...register("confirmpassword")}
         />
-        &nbsp;&nbsp;
+                &nbsp;&nbsp;
+
         <button type="submit" className="btn">
           Signup
         </button>

@@ -246,39 +246,43 @@ async function DateSummary(req, res) {
   const userid = req.user.userid;
 
   if (!date) {
-   return res.status(400).json({
+    return res.status(400).json({
       success: false,
       message: "Date is required",
     });
   }
 
-
-  try {
-const result = await pool.query(`SELECT SUM (day_income) as totalincome , SUM (day_expenses) as totalexpense FROM userfinance WHERE userid = $1 AND todays_date :: TEXT ILIKE $2` , [userid , `${date}`] );
-
-
-
-if (result.rowCount === 0 ) {
-  return res.json({
-    success : false,
-    message : "No record Found"
-  })
-
-}
-
-return res.status(400).json({
-  success : true,
-  message : result.rows[0]
-})
-
-
-
+  if (
+    /^\d{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/.test(date) === false
+  ) {
+    return res.status(400).json({
+      message: "Invalid Date format Date should be in yyyy-mm-dd format",
+    });
   }
 
-  catch (error) {
+  try {
+    const result = await pool.query(
+      `SELECT SUM (day_income) as totalincome , SUM (day_expenses) as totalexpense FROM userfinance WHERE userid = $1 AND todays_date :: date :: TEXT ILIKE $2`,
+      [userid, `${date}`],
+    );
+
+    console.log(result);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No record Found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: result.rows[0],
+    });
+  } catch (error) {
     console.log(error);
     return res.json({
-      success : false,
+      success: false,
       message: "Server Error",
     });
   }

@@ -24,3 +24,9 @@
 
 
 
+
+const number = "1"
+
+console.log(number.padStart(2 , "0"));
+console.log(number.padEnd(2 , "0"));
+

@@ -112,10 +112,14 @@ function TrackFinance() {
 
       setcurrencytype(msg.message?.currency_type);
       return setusername(msg.message?.full_name);
-    } catch (error) {
+    }
+
+    catch (error) {
       console.log(error);
       return toast.error(error.message);
     }
+
+    
   }
 
   useEffect(() => {

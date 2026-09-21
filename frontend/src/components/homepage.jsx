@@ -7,7 +7,7 @@ function Homepage() {
       <Link to="/aboutus" className="common-links">Aboutus</Link> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <Link to="faq" className="common-links">FAQ</Link>
         <br /><br /><br />
-       <h1 style={{fontSize : "50px" , color : "purple"}}>Start your FinTrack journey</h1>
+       <h1 style={{fontSize : "50px"}}>Start your FinTrack journey</h1>
      <h2 className="sub-head">Know Where Your Money Goes and Why</h2>
        <br /><br /><br />
        <Link to= "/signup" className="common-links">Get Started</Link>
