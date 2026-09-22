@@ -88,7 +88,10 @@ async function ChangePassword(req, res) {
     });
   }
 
-  const query = await pool.query(
+
+  try {
+
+     const query = await pool.query(
     "SELECT hash_password FROM users WHERE userid = $1",
     [userid],
   );
@@ -113,6 +116,23 @@ async function ChangePassword(req, res) {
     success: true,
     message: "Password Changed Sucessfully",
   });
+
+  }
+
+
+  catch (error) {
+
+    return res.status(500).json({
+      success : false,
+      message : "Server Error"
+    })
+   console.log(error.message);
+
+
+
+  }
+
+
 }
 
 async function ChangeCurrency(req, res) {
@@ -147,24 +167,30 @@ async function ChangeCurrency(req, res) {
       currencytype,
       userid,
     ]);
-    res.status(200).json({
+   return res.status(200).json({
       success: true,
       message: `Currency type is now set to ${currencytype}`,
     });
-  } catch (error) {
+  }
+
+  catch (error) {
+
     if (error.code === "22P02") {
       return res.status(422).json({
         success: false,
         message: `We do not support ${currencytype} Currency as of now . But It may be added in the future`,
       });
+
     }
+
   }
 
-  res.status(500).json({
+  return res.status(500).json({
     success: false,
     message: "Server Error",
   });
   console.log(error.message);
+
 }
 
 async function ChangeDisplayName(req, res) {

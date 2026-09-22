@@ -266,14 +266,17 @@ async function DateSummary(req, res) {
       [userid, `${date}`],
     );
 
-    console.log(result);
 
-    if (result.rowCount === 0) {
-      return res.status(404).json({
-        success: false,
-        message: "No record Found",
-      });
+    if (result.rows[0].totalincome === null && result.rows[0].totalexpense === null) {
+
+     return res.json({
+        success : false,
+        message : "No record Found"
+      })
+
     }
+
+
 
     return res.status(200).json({
       success: true,

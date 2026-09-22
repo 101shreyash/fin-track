@@ -9,8 +9,8 @@ function CalenderPicker() {
   let [date, setdate] = useState(null);
   const navigate = useNavigate();
 
-  let [totalincome, settotalincome] = useState(null);
-  let [totalexpense, settotalexpense] = useState(null);
+  let [totalincome, settotalincome] = useState(undefined);
+  let [totalexpense, settotalexpense] = useState(undefined);
 
   async function ChangeDate(pickeddate) {
     setdate(pickeddate);
@@ -57,14 +57,18 @@ function CalenderPicker() {
     const outputincome = msg.message.totalincome;
     const outputexpense = msg.message.totalexpense;
 
+
+
+
+
     //  console.log(totalincome);
     //  console.log(totalexpense);
 
     {
-      outputincome !== null ? settotalincome(outputincome) : null;
+      outputincome !== undefined ? settotalincome(outputincome) : undefined;
     }
     {
-      outputexpense !== null ? settotalexpense(outputexpense) : null;
+      outputexpense !== undefined ? settotalexpense(outputexpense) : undefined;
     }
   }
 
@@ -79,19 +83,15 @@ function CalenderPicker() {
 
       <br />
       <br />
-      {totalincome === null ? (
-        <h1> Expenses : Not Found till now.</h1>
-      ) : (
-        <h1>Expenses : {totalexpense}</h1>
-      )}
-      {totalincome === null ? (
-        <h1> Income : Not Found till now. </h1>
-      ) : (
-        <h1>Income : {totalincome}</h1>
-      )}
-      <br />
-      <br />
-      <br />
+
+      {totalincome === undefined && totalexpense === undefined ? <h1> No  Financial Record Found !</h1> : ""}
+      {totalincome !== undefined ? <h1> Total Income  of  : {totalincome}</h1> : ""}
+      {totalexpense !== undefined ? <h1>Total Expenses : {totalexpense}</h1> : ""}
+
+
+
+
+      <br /><br /><br />
     </>
   );
 }
