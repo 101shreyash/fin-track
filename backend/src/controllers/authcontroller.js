@@ -45,23 +45,18 @@ function signup(req, res) {
   }
 
   if (!confirmpassword) {
-
-   return res.status(400).json({
+    return res.status(400).json({
       success: false,
       message: "Confirm Password is required",
     });
-
   }
 
   if (password !== confirmpassword) {
-
     return res.status(401).json({
       success: false,
       message: "Confirmation Password didn't matched please try again",
     });
-
   }
-
 
   async function DbCall() {
     const hashpassword = await bcrypt.hash(password, 13);
@@ -157,4 +152,22 @@ function Logout(req, res) {
   });
 }
 
-export { signup, Login, Logout };
+function AuthenicationCheck(req, res) {
+  const username = req.user?.username;
+
+  if (!username) {
+    return res.status(401).json({
+      success: false,
+      authenticated: false,
+    });
+  }
+
+  if (username) {
+    return res.status(200).json({
+      success: true,
+      authenticated: true,
+    });
+  }
+}
+
+export { signup, Login, Logout, AuthenicationCheck };
